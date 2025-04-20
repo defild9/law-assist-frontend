@@ -25,3 +25,8 @@ export interface IRefreshTokenResponse {
   refreshToken: string;
   accessTokenExpires: string;
 }
+
+export interface IVerifyEmailResponse {
+  success: boolean;
+  message: string;
+}
