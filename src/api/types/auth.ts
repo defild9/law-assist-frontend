@@ -9,6 +9,7 @@ export interface IUser {
   refreshToken: string;
   isEmailVerified: boolean;
   verificationToken: string;
+  profile_picture: string;
   createdAt: string;
   updatedAt: string;
   id: string;

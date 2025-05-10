@@ -52,6 +52,7 @@ export const config = {
               refreshToken: response.refreshToken,
               email: response.user.email,
               role: response.user.role,
+              userImage: response.user.profile_picture,
               id: response.user.id,
               isEmailVerified: response.user.isEmailVerified,
             };
@@ -70,7 +71,7 @@ export const config = {
     error: '/sign-up',
   },
   callbacks: {
-    jwt: async ({ token, account, user }) => {
+    jwt: async ({ token, account, user, trigger, session: newSession }) => {
       if (token?.accessToken) {
         const decodedToken = jwtDecode(String(token.accessToken));
         token.accessTokenExpires = Number(decodedToken?.exp) * 1000;
@@ -85,7 +86,16 @@ export const config = {
           role: user.role,
           id: user.id,
           isEmailVerified: user.isEmailVerified,
+          userImage: user.userImage,
         };
+      }
+      if (trigger === 'update' && newSession) {
+        if (newSession.user?.email) {
+          token.email = newSession.user.email;
+        }
+        if (newSession.userImage) {
+          token.userImage = newSession.userImage;
+        }
       }
 
       if (Date.now() < Number(token.accessTokenExpires)) {
@@ -94,7 +104,7 @@ export const config = {
 
       return refreshAccessToken(token);
     },
-    session: async ({ session, token }) => {
+    session: async ({ session, token, trigger, newSession }) => {
       if (token) {
         session.accessToken = token.accessToken as string;
         session.refreshToken = token.refreshToken as string;
@@ -102,6 +112,16 @@ export const config = {
         session.role = token.role as 'user' | 'admin';
         session.id = token.id as string;
         session.isEmailVerified = token.isEmailVerified as boolean;
+        session.userImage = token.userImage as string;
+      }
+
+      if (trigger === 'update' && newSession) {
+        if (newSession.user?.email) {
+          session.user.email = newSession.user.email;
+        }
+        if (newSession.userImage) {
+          session.userImage = newSession.userImage;
+        }
       }
 
       return session;
