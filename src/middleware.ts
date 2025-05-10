@@ -18,5 +18,5 @@ export default auth(req => {
 });
 
 export const config = {
-  matcher: ['/sign-in', '/chat/:path*'],
+  matcher: ['/sign-in', '/chat/:path*', '/profile'],
 };

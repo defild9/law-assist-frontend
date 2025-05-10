@@ -7,6 +7,7 @@ declare module 'next-auth' {
     accessToken: string;
     refreshToken: string;
     email: string;
+    userImage: string;
     role: 'user' | 'admin';
     isEmailVerified: boolean;
   }
@@ -17,6 +18,7 @@ declare module 'next-auth' {
     refreshToken: string;
     role: 'user' | 'admin';
     isEmailVerified: boolean;
+    userImage: string;
   }
 }
 
@@ -26,6 +28,7 @@ declare module 'next-auth/jwt' {
     accessToken: string;
     refreshToken: string;
     email: string;
+    userImage: string;
     role: 'user' | 'admin';
     isEmailVerified: boolean;
   }
