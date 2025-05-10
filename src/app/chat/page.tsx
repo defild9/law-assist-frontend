@@ -1,7 +1,8 @@
+'use client';
+
+import ChatContainer from '@/components/chat/ChatContainer';
 import React from 'react';
 
-const ChatPage = () => {
-  return <div>Chat</div>;
-};
-
-export default ChatPage;
+export default function ChatPage() {
+  return <ChatContainer />;
+}
