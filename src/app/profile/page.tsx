@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import UpdateProfileForm from '@/components/profile/UpdateProfileForm';
 import ChangePassword from '@/components/profile/ChangePassword';
 import DeleteAccount from '@/components/profile/DeleteAccount';
+import VideoConsultation from '@/components/profile/VideoConsultation';
 
 export default function Page() {
   return (
@@ -30,7 +31,9 @@ export default function Page() {
           </TabsContent>
 
           <TabsContent value="consultations">
-            {/* TODO: tab with consultation with laywer */}
+            <div className="grid gap-6">
+              <VideoConsultation />
+            </div>
           </TabsContent>
         </Tabs>
       </div>
