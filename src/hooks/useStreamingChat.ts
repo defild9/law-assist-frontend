@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
+import { useModel } from '@/contexts/ModelContext';
 
 export type ChatMessage = {
   id: string;
@@ -11,6 +12,7 @@ export type ChatMessage = {
 export function useStreamingChat(initialChatId?: string, initialMessages: ChatMessage[] = []) {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
+  const { model } = useModel();
 
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [chatId, setChatId] = useState<string | null>(initialChatId || null);
@@ -59,7 +61,7 @@ export function useStreamingChat(initialChatId?: string, initialMessages: ChatMe
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session.accessToken}`,
         },
-        body: JSON.stringify({ prompt, chatId }),
+        body: JSON.stringify({ prompt, chatId, model }),
       });
 
       if (!res.ok || !res.body) {
