@@ -21,9 +21,8 @@ const ChatSidebar: React.FC = () => {
 
       <ChatList />
 
-      {/*TODO: Add in future request to layer */}
       <div className="p-4 border-t mt-auto">
-        <Button className="w-full gap-2" onClick={() => {}}>
+        <Button className="w-full gap-2" onClick={() => router.push('/video-consultation/book')}>
           <Scale className="h-4 w-4" />
           Request Legal Consultation
         </Button>
