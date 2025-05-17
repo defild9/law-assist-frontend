@@ -10,3 +10,21 @@ export interface UpdateUserResponse {
   message: string;
   data: IUser;
 }
+export type UserRole = 'user' | 'admin' | 'lawyer';
+
+export interface LawyerProfile {
+  id: string;
+  user: string;
+  firstName: string;
+  lastName: string;
+  middleName?: string;
+  lawFirm?: string;
+  specialization?: string;
+  licenseNumber?: string;
+  yearsOfExperience?: number;
+  bio?: string;
+  certifications?: string[];
+  languages?: string[];
+  createdAt: string;
+  updatedAt: string;
+}
