@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useCreateDocumentTemplate } from '@/hooks/useDocumentTemplates';
-import TemplateForm, { TemplateFormValues } from '@/components/dashboard/TemplateForm';
+import TemplateForm, { TemplateFormValues } from '@/components/dashboard/templates/TemplateForm';
 
 export default function AddTemplatePage() {
   const router = useRouter();

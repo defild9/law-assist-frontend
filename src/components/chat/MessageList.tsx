@@ -12,7 +12,7 @@ interface MessageListProps {
 const MessageList: React.FC<MessageListProps> = ({ messages, isTyping }) => {
   return (
     <div className="space-y-4 px-4">
-      {messages.map((message, index) => (
+      {messages.map(message => (
         <motion.div
           key={message.id}
           initial={{ opacity: 0, y: 20 }}

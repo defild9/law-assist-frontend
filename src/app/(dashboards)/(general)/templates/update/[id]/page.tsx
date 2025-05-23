@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useDocumentTemplate, useUpdateDocumentTemplate } from '@/hooks/useDocumentTemplates';
 import { Template } from '@/api/types/document-tamplates';
-import TemplateForm, { TemplateFormValues } from '@/components/dashboard/TemplateForm';
+import TemplateForm, { TemplateFormValues } from '@/components/dashboard/templates/TemplateForm';
 
 export default function UpdateTemplatePage() {
   const params = useParams();
