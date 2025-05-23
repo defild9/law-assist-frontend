@@ -1,5 +1,11 @@
 import axiosInstance from '..';
-import { UpdateUser } from '../types/user';
+import {
+  ChangeUserRoleResponse,
+  FindUsersParams,
+  PaginatedUsers,
+  UpdateUser,
+  UserRole,
+} from '../types/user';
 
 export class UserService {
   public static async updateUser(data: UpdateUser) {
@@ -22,7 +28,27 @@ export class UserService {
     const response = await axiosInstance.post('/auth/forgot-password', { email });
     return response.data;
   }
-  public static async deleteUser() {
-    return axiosInstance.delete('/user');
+  public static async deleteUser(userId?: string) {
+    return axiosInstance.delete('/user', {
+      data: { userId },
+    });
+  }
+
+  public static async getUsers(params: FindUsersParams): Promise<PaginatedUsers> {
+    const response = await axiosInstance.get<PaginatedUsers>('/user', { params });
+    return response.data;
+  }
+
+  public static async changeUserRole(
+    userId: string,
+    role: UserRole
+  ): Promise<ChangeUserRoleResponse> {
+    const response = await axiosInstance.patch<ChangeUserRoleResponse>(
+      `/user/${userId}/change-role`,
+      {
+        role,
+      }
+    );
+    return response.data;
   }
 }
