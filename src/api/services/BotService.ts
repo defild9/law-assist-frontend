@@ -2,8 +2,16 @@ import axiosInstance from '..';
 import { CreateBot, GetAllBotsResponse, UpdateBot } from '../types/bots';
 
 export class BotService {
-  public static async getAllBots(): Promise<GetAllBotsResponse> {
-    const response = await axiosInstance.get<GetAllBotsResponse>('/bots');
+  public static async getAllBots(
+    search?: string,
+    collection?: string
+  ): Promise<GetAllBotsResponse> {
+    const params = {
+      ...(search && { search }),
+      ...(collection && { collection }),
+    };
+
+    const response = await axiosInstance.get<GetAllBotsResponse>('/bots', { params });
     return response.data;
   }
   public static async createBot(createBot: CreateBot) {

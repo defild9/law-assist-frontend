@@ -2,15 +2,18 @@ import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tan
 import { BotService } from '@/api/services/BotService';
 import { CreateBot, GetAllBotsResponse, UpdateBot } from '@/api/types/bots';
 
-export const useBots = (options?: UseQueryOptions<GetAllBotsResponse>) => {
+export const useBots = (
+  search?: string,
+  collection?: string,
+  options?: UseQueryOptions<GetAllBotsResponse>
+) => {
   return useQuery<GetAllBotsResponse>({
-    queryKey: ['bots'],
-    queryFn: () => BotService.getAllBots(),
+    queryKey: ['bots', search, collection],
+    queryFn: () => BotService.getAllBots(search, collection),
     staleTime: 5 * 60 * 1000,
     ...options,
   });
 };
-
 export const useCreateBot = (options?: UseMutationOptions<unknown, unknown, CreateBot>) => {
   return useMutation({
     mutationFn: (newBot: CreateBot) => BotService.createBot(newBot),
