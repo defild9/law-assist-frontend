@@ -1,20 +1,23 @@
 export interface CreateBot {
   name: string;
-  chromaCollectionName: string;
+  chromaCollection: string;
   description: string;
+  botPrompt?: string;
 }
 
 export interface Bot {
   id: string;
   name: string;
-  chromaCollectionName: string;
+  chromaCollection: string;
   description: string;
+  botPrompt?: string;
   createdAt: string;
   updatedAt: string;
 }
 export interface UpdateBot {
   name?: string;
-  chromaCollectionName?: string;
+  chromaCollection?: string;
+  botPrompt?: string;
   description?: string;
 }
 
