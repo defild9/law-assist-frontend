@@ -3,7 +3,7 @@
 import React, { use } from 'react';
 import ChatContainer from '@/components/chat/ChatContainer';
 import { useConversation } from '@/hooks/useConversation';
-import { ChatMessage } from '@/hooks/useStreamingChat';
+import { ChatMessage } from '@/api/types/conversation';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -31,6 +31,7 @@ export default function Page({ params }: PageProps) {
     id: m.id,
     role: m.role,
     content: m.content,
+    files: m.files,
   }));
 
   return <ChatContainer initialChatId={id} initialMessages={initialMessages} />;
