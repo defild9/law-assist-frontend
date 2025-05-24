@@ -19,6 +19,7 @@ interface SearchBarProps {
   setItemsPerPage: (itemsPerPage: number) => void;
   currentPage: number;
   setCurrentPage: (currentPage: number) => void;
+  isNeedRefresh?: boolean;
 }
 
 export function SearchBar({
@@ -28,6 +29,7 @@ export function SearchBar({
   setItemsPerPage,
   setCurrentPage,
   itemsPerPage,
+  isNeedRefresh = true,
 }: SearchBarProps) {
   const queryClient = useQueryClient();
   return (
@@ -58,15 +60,17 @@ export function SearchBar({
           <SelectItem value="20">20 per page</SelectItem>
         </SelectContent>
       </Select>
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => {
-          queryClient.invalidateQueries({ queryKey: ['vectorStoreCollectionsWithFiles'] });
-        }}
-      >
-        <RefreshCw className="h-4 w-4" />
-      </Button>
+      {isNeedRefresh && (
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => {
+            queryClient.invalidateQueries({ queryKey: ['vectorStoreCollectionsWithFiles'] });
+          }}
+        >
+          <RefreshCw className="h-4 w-4" />
+        </Button>
+      )}
     </div>
   );
 }

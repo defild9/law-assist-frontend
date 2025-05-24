@@ -27,6 +27,11 @@ const navigation = [
     href: '/templates',
     icon: FileMinus,
   },
+  {
+    name: 'Users',
+    href: '/users',
+    icon: Users,
+  },
 ];
 
 const LayoutNavigation = () => {
