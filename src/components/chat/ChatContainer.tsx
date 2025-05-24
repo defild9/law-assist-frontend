@@ -1,11 +1,11 @@
 'use client';
-
 import React, { useEffect } from 'react';
-import { useStreamingChat, ChatMessage } from '@/hooks/useStreamingChat';
+import { useStreamingChat } from '@/hooks/useStreamingChat';
 import { AnimatePresence, motion } from 'framer-motion';
 import MessageInput from './MessageInput';
 import MessageList from './MessageList';
 import { usePathname } from 'next/navigation';
+import { ChatMessage } from '@/api/types/conversation';
 
 interface ChatContainerProps {
   initialChatId?: string;
@@ -18,17 +18,16 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ initialChatId, initialMes
     initialChatId,
     initialMessages
   );
-
   const isEmptyChat = messages.length === 0;
 
   useEffect(() => {
     if (!isEmptyChat && pathName === '/chat') {
       clearChat();
     }
-  }, [pathName]);
+  }, [pathName, isEmptyChat, clearChat]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="relativeflex flex-col min-h-screen bg-background">
       <div className="flex-1 relative">
         <AnimatePresence>
           {isEmptyChat ? (
@@ -44,7 +43,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ initialChatId, initialMes
                   Ask me anything and I&apos;ll do my best to help you. Start by typing a message
                   below.
                 </p>
-                <MessageInput onSendMessage={sendMessage} />
+                <MessageInput onSendMessage={sendMessage} autoFocus />
               </div>
             </motion.div>
           ) : (
@@ -60,6 +59,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ initialChatId, initialMes
           )}
         </AnimatePresence>
       </div>
+
       {!isEmptyChat && (
         <motion.div
           className="w-full py-4 px-4 absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm"
