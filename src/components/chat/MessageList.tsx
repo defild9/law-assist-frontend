@@ -1,8 +1,8 @@
 import React from 'react';
-import { ChatMessage } from '@/hooks/useStreamingChat';
 import MessageItem from './MessageItem';
 import { motion } from 'framer-motion';
 import { LoadingDots } from '../ui/LoadingDots';
+import { ChatMessage } from '@/api/types/conversation';
 
 interface MessageListProps {
   messages: ChatMessage[];

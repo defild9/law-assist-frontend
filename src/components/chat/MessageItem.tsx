@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { UserIcon, Copy, ThumbsUp, ThumbsDown } from 'lucide-react';
-import { ChatMessage } from '@/hooks/useStreamingChat';
+import { UserIcon, Copy, ThumbsUp, ThumbsDown, FileText, Download } from 'lucide-react';
 import { cn } from '@/libs/utils';
 import { Button } from '../ui/Button';
 import { toast } from 'sonner';
@@ -18,6 +17,7 @@ import {
   DialogClose,
 } from '../ui/Dialog';
 import { Textarea } from '../ui/TextArea';
+import { ChatMessage } from '@/api/types/conversation';
 
 interface MessageItemProps {
   message: ChatMessage;
@@ -41,6 +41,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
   const [showTags, setShowTags] = useState(false);
   const [showOtherDialog, setShowOtherDialog] = useState(false);
   const [otherFeedback, setOtherFeedback] = useState('');
+  const [showImageDialog, setShowImageDialog] = useState<string | null>(null);
 
   const createFeedback = useCreateFeedback({
     onSuccess: data => {
@@ -64,6 +65,13 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
     }
   };
 
+  const handleDownload = (dataUrl: string, filename: string) => {
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = filename;
+    a.click();
+  };
+
   const handleLike = () => {
     setFbType(FeedbackType.LIKE);
     setFbTag(null);
@@ -82,7 +90,6 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
     setFbTag(tag);
     const payload = { type: FeedbackType.DISLIKE as const, tag };
     const onDone = () => {
-      // hide the tags panel
       setFbType(null);
       setFbTag(null);
     };
@@ -135,13 +142,58 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
         </div>
         <div
           className={cn(
-            'p-3 rounded-lg',
+            'p-3 rounded-lg max-w-[90vw] break-words',
             isUser
               ? 'order-1 bg-primary text-primary-foreground rounded-tr-none'
               : 'bg-muted rounded-tl-none'
           )}
         >
-          <p className="text-sm whitespace-pre-wrap break-words">{message.content}</p>
+          <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+
+          {message.files && message.files.length > 0 && (
+            <div className="mt-2 space-y-2">
+              {message.files.map((file, index) =>
+                file.type === 'image_url' ? (
+                  <div key={index} className="relative rounded-lg overflow-hidden">
+                    <img
+                      src={file.image_url.url}
+                      alt={`attachment-${index}`}
+                      className="w-full h-auto max-h-[300px] object-contain cursor-pointer hover:opacity-90 transition-opacity"
+                      onClick={() => setShowImageDialog(file.image_url.url)}
+                    />
+                    <Button
+                      variant="secondary"
+                      size="icon"
+                      className="absolute top-2 right-2 bg-black/50 hover:bg-black/70"
+                      onClick={() => handleDownload(file.image_url.url, `image-${index}.png`)}
+                    >
+                      <Download className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <div
+                    key={index}
+                    className={cn(
+                      'flex items-center gap-2 p-2 rounded-lg',
+                      isUser ? 'bg-primary-foreground/10' : 'bg-background'
+                    )}
+                  >
+                    <FileText className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm font-medium flex-1 truncate">
+                      {file.file.filename}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDownload(file.file.file_data, file.file.filename)}
+                    >
+                      <Download className="h-4 w-4" />
+                    </Button>
+                  </div>
+                )
+              )}
+            </div>
+          )}
         </div>
       </div>
 
