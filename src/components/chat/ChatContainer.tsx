@@ -27,7 +27,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ initialChatId, initialMes
   }, [pathName, isEmptyChat, clearChat]);
 
   return (
-    <div className="relativeflex flex-col min-h-screen bg-background">
+    <div className="relative flex flex-col min-h-screen bg-background">
       <div className="flex-1 relative">
         <AnimatePresence>
           {isEmptyChat ? (
