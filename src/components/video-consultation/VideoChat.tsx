@@ -34,6 +34,7 @@ export default function VideoChat({
   videoDeviceId,
   audioDeviceId,
 }: VideoChatProps) {
+  console.log(roomId);
   const {
     cameraVideoRef,
     screenVideoRef,
