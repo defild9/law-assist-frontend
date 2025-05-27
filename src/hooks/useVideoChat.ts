@@ -32,7 +32,7 @@ export function useVideoChat(
   const [videoEnabled, setVideoEnabled] = useState(true);
 
   useEffect(() => {
-    const socket = io(process.env.VIDEO_CONSULTATION_URL);
+    const socket = io(process.env.NEXT_PUBLIC_VIDEO_CONSULTATION_URL);
     socketRef.current = socket;
 
     navigator.mediaDevices

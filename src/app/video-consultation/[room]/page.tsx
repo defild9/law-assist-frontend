@@ -41,7 +41,6 @@ export default async function Page({ params }: { params: Promise<{ room: string 
     return <VideoConsultationPending scheduledAt={consultation.scheduledAt} />;
   }
 
-  // Проверка, что пользователь — участник
   if (session?.id === consultation.user.id || session?.id === consultation.lawyer.id) {
     return <VideoRoom roomId={room} consultation={consultation} />;
   }

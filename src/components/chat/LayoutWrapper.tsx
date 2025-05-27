@@ -112,8 +112,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
             </DropdownMenu>
           </div>
         </div>
-
-        <main className="flex-1 relative">{children}</main>
+        <main className="flex-1 flex flex-col overflow-hidden">{children}</main>
       </div>
     </>
   );

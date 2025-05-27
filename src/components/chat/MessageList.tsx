@@ -10,9 +10,11 @@ interface MessageListProps {
 }
 
 const MessageList: React.FC<MessageListProps> = ({ messages, isTyping }) => {
+  const displayedMessages = isTyping ? messages.slice(0, -1) : messages;
+
   return (
     <div className="space-y-4 px-4">
-      {messages.map(message => (
+      {displayedMessages.map(message => (
         <motion.div
           key={message.id}
           initial={{ opacity: 0, y: 20 }}
@@ -22,6 +24,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isTyping }) => {
           <MessageItem message={message} />
         </motion.div>
       ))}
+
       {isTyping && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
