@@ -23,7 +23,7 @@ interface AddBotModalProps {
   isOpen: boolean;
   onClose: () => void;
   newBot: { name: string; description: string; collection: string; botPrompt: string };
-  setNewBot: React.Dispatch<React.SetStateAction<typeof newBot>>;
+  setNewBot: React.Dispatch<React.SetStateAction<any>>;
   collections?: VectorStoreCollectionsResponse;
   onCreate: () => void;
   isCreating: boolean;

@@ -78,6 +78,7 @@ export default function VideoChat({
             {screenStreams.map(r => (
               <div key={r.trackId} className="relative bg-black rounded-lg overflow-hidden">
                 <video
+                  //@ts-ignore
                   ref={el => el && (el.srcObject = r.stream)}
                   autoPlay
                   playsInline
@@ -92,6 +93,7 @@ export default function VideoChat({
             {videoStreams.map(r => (
               <div key={r.trackId} className="relative bg-black rounded-lg overflow-hidden">
                 <video
+                  //@ts-ignore
                   ref={el => el && (el.srcObject = r.stream)}
                   autoPlay
                   playsInline
@@ -108,6 +110,7 @@ export default function VideoChat({
             {videoStreams.map(r => (
               <div key={r.trackId} className="relative bg-black rounded-lg overflow-hidden">
                 <video
+                  //@ts-ignore
                   ref={el => el && (el.srcObject = r.stream)}
                   autoPlay
                   playsInline
