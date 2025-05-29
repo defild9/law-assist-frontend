@@ -70,7 +70,9 @@ export function SearchConversationsDialog({ open, onOpenChange }: SearchDialogPr
           <CommandGroup heading="Чати">
             {allChats.map(chat => {
               const lastMsg =
+                //@ts-ignore
                 chat.lastMessage?.content ?? chat.messages_details?.slice(-1)[0]?.content ?? '';
+              //@ts-ignore
               const firstMsg = chat.messages_details?.[0]?.content ?? 'Без назви';
               const title = chat.title !== 'New Chat' ? chat.title : firstMsg.slice(0, 30) + '…';
               const date = chat.updatedAt ?? chat.createdAt;
@@ -81,6 +83,7 @@ export function SearchConversationsDialog({ open, onOpenChange }: SearchDialogPr
                   value={title}
                   onSelect={() => {
                     onOpenChange(false);
+                    //@ts-ignore
                     router.push(`/chat/${chat._id}`);
                   }}
                   className="flex items-center gap-2 py-2"

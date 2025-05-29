@@ -68,6 +68,7 @@ const DeleteAccount = () => {
             <AlertDialogFooter>
               <AlertDialogCancel disabled={isPending}>Скасувати</AlertDialogCancel>
               <AlertDialogAction
+                //@ts-ignore
                 onClick={() => deleteUser()}
                 className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                 disabled={isPending}

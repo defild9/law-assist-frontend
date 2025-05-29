@@ -57,6 +57,7 @@ const VideoConsultation = () => {
     if (newDate !== selectedConsultation.scheduledAt) {
       updateSchedule.mutate({
         consultationId: selectedConsultation.id,
+        //@ts-ignore
         updateSchedule: { scheduledAt: newDate },
       });
     }

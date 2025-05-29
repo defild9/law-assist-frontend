@@ -83,13 +83,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        <SearchConversationsDialog
-          open={isSearchOpen}
-          onOpenChange={setIsSearchOpen}
-          onSelectChat={chatId => {
-            setIsSearchOpen(false);
-          }}
-        />
+        <SearchConversationsDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} />
 
         <main className="flex-1 relative">{children}</main>
       </div>

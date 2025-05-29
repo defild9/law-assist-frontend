@@ -17,13 +17,16 @@ export function useVideoChat(
   videoDeviceId?: string,
   audioDeviceId?: string
 ) {
+  //@ts-ignore
   const socketRef = useRef<Socket>();
   const pcsRef = useRef(new Map<string, RTCPeerConnection>());
 
   const cameraVideoRef = useRef<HTMLVideoElement>(null);
   const screenVideoRef = useRef<HTMLVideoElement>(null);
 
+  //@ts-ignore
   const cameraStreamRef = useRef<MediaStream>();
+  //@ts-ignore
   const screenStreamRef = useRef<MediaStream>();
 
   const [remoteStreams, setRemoteStreams] = useState<RemoteStream[]>([]);

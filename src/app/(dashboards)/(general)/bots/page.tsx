@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import BotsAndCollectionsContent from '@/components/dashboard/bots/BotsAndCollectionsContent';
 import { Metadata } from 'next';
 
