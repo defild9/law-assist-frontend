@@ -32,7 +32,7 @@ export default function FeedbackPage() {
   }
 
   if (error) {
-    return <div className="text-red-500">Помилка завантаження відгуків</div>;
+    return <div className="text-red-500">Помилка завантаження відгуків!</div>;
   }
 
   return (
