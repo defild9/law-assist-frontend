@@ -95,11 +95,11 @@ const UpdateProfileForm = () => {
         <CardHeader>
           <div className="flex items-center justify-between mb-4">
             <div>
-              <CardTitle>Profile Picture</CardTitle>
-              <CardDescription>Update your profile picture and personal details</CardDescription>
+              <CardTitle>Фото профілю</CardTitle>
+              <CardDescription>Оновіть своє фото та електронну адресу</CardDescription>
             </div>
             <Button variant="outline" onClick={handleSubmit(onSubmit)} disabled={isPending}>
-              {isPending ? 'Saving…' : 'Save Changes'}
+              {isPending ? 'Збереження…' : 'Зберегти зміни'}
             </Button>
           </div>
         </CardHeader>
@@ -108,7 +108,7 @@ const UpdateProfileForm = () => {
           <div className="flex items-center gap-6">
             <Avatar className="h-24 w-24">
               {preview ? (
-                <AvatarImage src={preview} alt="Preview" />
+                <AvatarImage src={preview} alt="Попередній перегляд" />
               ) : (
                 <AvatarFallback className="text-2xl">
                   <User className="h-12 w-12" />
@@ -121,12 +121,12 @@ const UpdateProfileForm = () => {
               onClick={() => fileInputRef.current?.click()}
             >
               <Camera className="h-4 w-4" />
-              Change Picture
+              Змінити фото
             </Button>
           </div>
 
           <div className="grid gap-4">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">Електронна пошта</Label>
             <Input id="email" type="email" {...register('email')} placeholder="you@example.com" />
             {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
           </div>

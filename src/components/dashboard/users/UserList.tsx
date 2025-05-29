@@ -48,24 +48,24 @@ export function UserList({ users, isLoading }: UserListProps) {
 
   const { mutate: deleteUser, isPending: isDeleting } = useDeleteUser({
     onSuccess: () => {
-      toast.success('User deleted successfully');
+      toast.success('Користувача успішно видалено');
       closeDelete();
       setSelectedUser(null);
       queryClient.invalidateQueries({ queryKey: ['users'] });
     },
     onError: () => {
-      toast.error('Failed to delete user');
+      toast.error('Не вдалося видалити користувача');
     },
   });
 
   const { mutate: changeUserRole, isPending: isChangingRole } = useChangeUserRole({
     onSuccess: (_data, { role }) => {
-      toast.success(`Role changed to ${role}`);
+      toast.success(`Роль змінено на ${role}`);
       queryClient.invalidateQueries({ queryKey: ['users'] });
       setRoleDialog({ isOpen: false, user: null, newRole: null });
     },
     onError: () => {
-      toast.error('Failed to change role');
+      toast.error('Не вдалося змінити роль');
     },
   });
 
@@ -74,11 +74,11 @@ export function UserList({ users, isLoading }: UserListProps) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>User</TableHead>
+            <TableHead>Користувач</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Created At</TableHead>
+            <TableHead>Статус</TableHead>
+            <TableHead>Роль</TableHead>
+            <TableHead>Дата створення</TableHead>
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
@@ -94,7 +94,9 @@ export function UserList({ users, isLoading }: UserListProps) {
           ) : users.length === 0 ? (
             <TableRow>
               <TableCell colSpan={6}>
-                <div className="text-center py-6 text-muted-foreground">No users found</div>
+                <div className="text-center py-6 text-muted-foreground">
+                  Користувачів не знайдено
+                </div>
               </TableCell>
             </TableRow>
           ) : (
@@ -119,7 +121,7 @@ export function UserList({ users, isLoading }: UserListProps) {
                 <TableCell>{user.email}</TableCell>
                 <TableCell>
                   <Badge variant={user.isEmailVerified ? 'default' : 'secondary'}>
-                    {user.isEmailVerified ? 'Verified' : 'Unverified'}
+                    {user.isEmailVerified ? 'Підтверджено' : 'Не підтверджено'}
                   </Badge>
                 </TableCell>
                 <TableCell>
@@ -130,7 +132,7 @@ export function UserList({ users, isLoading }: UserListProps) {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Change role</DropdownMenuLabel>
+                      <DropdownMenuLabel>Змінити роль</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       {(['user', 'admin', 'lawyer'] as UserRole[]).map(role => (
                         <DropdownMenuItem
@@ -143,7 +145,7 @@ export function UserList({ users, isLoading }: UserListProps) {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
-                <TableCell>{format(new Date(user.createdAt), 'MMM d, yyyy')}</TableCell>
+                <TableCell>{format(new Date(user.createdAt), 'd MMM yyyy')}</TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -152,7 +154,7 @@ export function UserList({ users, isLoading }: UserListProps) {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuLabel>Дії</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         className="text-red-600"
@@ -162,7 +164,7 @@ export function UserList({ users, isLoading }: UserListProps) {
                         }}
                       >
                         <Trash2 className="h-4 w-4 mr-2" />
-                        Delete User
+                        Видалити користувача
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -172,6 +174,7 @@ export function UserList({ users, isLoading }: UserListProps) {
           )}
         </TableBody>
       </Table>
+
       <DeleteUserModal
         open={isVisibleDelete}
         onOpenChange={closeDelete}
@@ -180,6 +183,7 @@ export function UserList({ users, isLoading }: UserListProps) {
           if (selectedUser) deleteUser(selectedUser.id);
         }}
       />
+
       <ChangeRoleModal
         open={roleDialog.isOpen}
         onOpenChange={isOpen =>

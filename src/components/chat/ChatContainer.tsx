@@ -37,10 +37,11 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ initialChatId, initialMes
             exit={{ opacity: 0 }}
           >
             <div className="max-w-md w-full text-center">
-              <h1 className="text-2xl font-bold mb-4">Chat with AI Lawyer</h1>
+              <h1 className="text-2xl font-bold mb-4">Спілкуйтеся з AI-юристом</h1>
               <p className="text-muted-foreground mb-6">
-                Ask me anything and I’ll do my best to help you.
+                Поставте мені будь-яке запитання — і я зроблю все можливе, щоб допомогти вам.
               </p>
+
               <MessageInput onSendMessage={sendMessage} autoFocus />
             </div>
           </motion.div>

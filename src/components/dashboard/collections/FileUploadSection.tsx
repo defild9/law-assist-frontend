@@ -17,13 +17,14 @@ export function FileUploadSection({ collectionName }: FileUploadSectionProps) {
   const { mutate: uploadFileToCollection, isPending } = useUploadFileToCollection({
     onSuccess: () => {
       setSelectedFile(null);
-      toast.success('File uploaded successfully');
+      toast.success('Файл успішно завантажено');
       queryClient.invalidateQueries({ queryKey: ['vectorStoreCollectionsWithFiles'] });
     },
     onError: () => {
-      toast.error('Something went wrong while uploading the file');
+      toast.error('Сталася помилка під час завантаження файлу');
     },
   });
+
   return (
     <>
       <input
@@ -39,12 +40,12 @@ export function FileUploadSection({ collectionName }: FileUploadSectionProps) {
         onClick={() => document.getElementById(`file-upload-${collectionName}`)?.click()}
       >
         <Upload className="h-4 w-4 mr-2" />
-        Upload PDF
+        Завантажити PDF
       </Button>
 
       {selectedFile && (
         <div className="space-y-2 mt-2">
-          <p className="text-sm font-medium">Selected file:</p>
+          <p className="text-sm font-medium">Вибраний файл:</p>
           <div className="text-sm text-muted-foreground">{selectedFile.name}</div>
           <Button
             className="w-full"
@@ -52,7 +53,7 @@ export function FileUploadSection({ collectionName }: FileUploadSectionProps) {
               uploadFileToCollection({ file: selectedFile, collectionName: collectionName })
             }
           >
-            {isPending ? <Loader2 className="animate-spin h-4 w-4" /> : 'Upload'}
+            {isPending ? <Loader2 className="animate-spin h-4 w-4" /> : 'Завантажити'}
           </Button>
         </div>
       )}

@@ -44,20 +44,20 @@ export function LawyerList({ lawyers }: LawyerListProps) {
 
   const createProfile = useCreateLawyerProfile({
     onSuccess: () => {
-      toast.success('Profile created');
+      toast.success('Профіль створено');
       close();
       queryClient.invalidateQueries({ queryKey: ['users'] });
     },
-    onError: () => toast.error('Failed to create'),
+    onError: () => toast.error('Не вдалося створити профіль'),
   });
 
   const updateProfile = useUpdateLawyerProfile({
     onSuccess: () => {
-      toast.success('Profile updated');
+      toast.success('Профіль оновлено');
       close();
       queryClient.invalidateQueries({ queryKey: ['users'] });
     },
-    onError: () => toast.error('Failed to update'),
+    onError: () => toast.error('Не вдалося оновити профіль'),
   });
 
   function open(lawyer: UserWithProfile) {
@@ -113,13 +113,13 @@ export function LawyerList({ lawyers }: LawyerListProps) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
+            <TableHead>Ім’я</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Specialization</TableHead>
-            <TableHead>Law Firm</TableHead>
-            <TableHead>Experience</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead>Спеціалізація</TableHead>
+            <TableHead>Юридична компанія</TableHead>
+            <TableHead>Досвід</TableHead>
+            <TableHead>Статус</TableHead>
+            <TableHead>Дії</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -144,7 +144,7 @@ export function LawyerList({ lawyers }: LawyerListProps) {
                     ) : (
                       <div className="flex items-center gap-2">
                         <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                        <p className="text-sm text-muted-foreground">Profile not completed</p>
+                        <p className="text-sm text-muted-foreground">Профіль не заповнено</p>
                       </div>
                     )}
                   </div>
@@ -155,12 +155,12 @@ export function LawyerList({ lawyers }: LawyerListProps) {
               <TableCell>{lawyer.lawyerProfile?.lawFirm || '-'}</TableCell>
               <TableCell>
                 {lawyer.lawyerProfile?.yearsOfExperience
-                  ? `${lawyer.lawyerProfile.yearsOfExperience} years`
+                  ? `${lawyer.lawyerProfile.yearsOfExperience} років`
                   : '-'}
               </TableCell>
               <TableCell>
                 <Badge variant={lawyer.isEmailVerified ? 'default' : 'secondary'}>
-                  {lawyer.isEmailVerified ? 'Verified' : 'Unverified'}
+                  {lawyer.isEmailVerified ? 'Підтверджено' : 'Не підтверджено'}
                 </Badge>
               </TableCell>
               <TableCell>
@@ -173,12 +173,12 @@ export function LawyerList({ lawyers }: LawyerListProps) {
                   {lawyer.lawyerProfile ? (
                     <>
                       <Pencil className="h-4 w-4 mr-2" />
-                      Edit Profile
+                      Редагувати
                     </>
                   ) : (
                     <>
                       <UserPlus className="h-4 w-4 mr-2" />
-                      Add Profile
+                      Додати профіль
                     </>
                   )}
                 </Button>

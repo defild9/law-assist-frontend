@@ -28,23 +28,25 @@ import { signOut } from 'next-auth/react';
 const DeleteAccount = () => {
   const { mutate: deleteUser, isPending } = useDeleteUser({
     onSuccess: () => {
-      console.log('Account deleted successfully');
+      console.log('Обліковий запис успішно видалено');
       signOut();
     },
     onError: error => {
-      console.error('Failed to delete account:', error);
+      console.error('Не вдалося видалити обліковий запис:', error);
     },
   });
 
   return (
     <Card className="border-destructive">
       <CardHeader>
-        <CardTitle className="text-destructive">Delete Account</CardTitle>
-        <CardDescription>Permanently delete your account and all associated data.</CardDescription>
+        <CardTitle className="text-destructive">Видалення облікового запису</CardTitle>
+        <CardDescription>
+          Незворотне видалення облікового запису та всіх пов’язаних даних.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <p className="text-sm text-muted-foreground">
-          Once you delete your account, there is no going back. Please be certain.
+          Після видалення облікового запису ви не зможете його відновити. Будь ласка, переконайтесь.
         </p>
       </CardContent>
       <CardFooter>
@@ -52,25 +54,25 @@ const DeleteAccount = () => {
           <AlertDialogTrigger asChild>
             <Button variant="destructive" className="gap-2" disabled={isPending}>
               <AlertTriangle className="h-4 w-4" />
-              Delete Account
+              Видалити обліковий запис
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogTitle>Ви впевнені?</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your account and remove
-                your data from our servers.
+                Цю дію не можна скасувати. Ваш обліковий запис буде остаточно видалено разом з усіма
+                даними.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
+              <AlertDialogCancel disabled={isPending}>Скасувати</AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => deleteUser()}
                 className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                 disabled={isPending}
               >
-                Delete Account
+                Видалити обліковий запис
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

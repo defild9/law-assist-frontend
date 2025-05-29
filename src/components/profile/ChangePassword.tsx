@@ -25,33 +25,35 @@ const ChangePassword = () => {
     if (email) {
       sendResetLink(email);
     } else {
-      console.warn('No email found in session.');
+      console.warn('Email не знайдено в сесії.');
     }
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Change Password</CardTitle>
-        <CardDescription>Change your account password.</CardDescription>
+        <CardTitle>Змінити пароль</CardTitle>
+        <CardDescription>
+          Отримайте посилання для скидання паролю на електронну пошту.
+        </CardDescription>
       </CardHeader>
       <CardFooter>
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button variant="outline" onClick={handleSendReset}>
-              Change Password
+              Змінити пароль
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Check your email</AlertDialogTitle>
+              <AlertDialogTitle>Перевірте пошту</AlertDialogTitle>
               <AlertDialogDescription>
-                We&apos;ve sent a password reset link to your email. Please check your inbox and
-                follow the instructions.
+                Ми надіслали вам посилання для скидання паролю. Перевірте свою скриньку та
+                дотримуйтесь інструкцій.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogAction>OK</AlertDialogAction>
+              <AlertDialogAction>Гаразд</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>

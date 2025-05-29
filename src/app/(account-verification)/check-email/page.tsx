@@ -3,7 +3,7 @@ import { MailIcon } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Check email | Law Assist',
+  title: 'Перевірка пошти | Law Assist',
 };
 
 export default function CheckEmailPage() {
@@ -15,11 +15,11 @@ export default function CheckEmailPage() {
             <MailIcon className="w-6 h-6 text-primary" />
           </div>
 
-          <h1 className="text-2xl font-semibold tracking-tight">Check your email</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Перевірте пошту</h1>
 
           <p className="text-muted-foreground">
-            We&apos;ve sent you a verification link to the email address you provided during
-            registration.
+            Ми надіслали вам посилання для підтвердження на електронну адресу, яку ви вказали під
+            час реєстрації.
           </p>
         </div>
 
@@ -28,13 +28,13 @@ export default function CheckEmailPage() {
             className="w-full h-10 px-4 py-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-white hover:text-black"
             href="/sign-in"
           >
-            Return to Sing Up
+            Повернутися до входу
           </Link>
 
           <p className="text-sm text-muted-foreground">
-            Didn&apos;t receive an email?{' '}
+            Не отримали листа?{' '}
             <button className="font-medium underline underline-offset-4 hover:text-primary">
-              Click to resend
+              Натисніть, щоб надіслати повторно
             </button>
           </p>
         </div>

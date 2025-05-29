@@ -34,27 +34,27 @@ export function AddCollectionModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create New Collection</DialogTitle>
-          <DialogDescription>Create a new collection for storing documents</DialogDescription>
+          <DialogTitle>Створити нову колекцію</DialogTitle>
+          <DialogDescription>Створіть нову колекцію для зберігання документів</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Collection Name</label>
+            <label className="text-sm font-medium">Назва колекції</label>
             <Input
               value={collectionName}
               onChange={e => setCollectionName(e.target.value)}
-              placeholder="Enter collection name"
+              placeholder="Введіть назву колекції"
             />
           </div>
         </div>
 
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            Скасувати
           </Button>
           <Button onClick={onCreate}>
-            {isCreating ? <Loader2 className="animate-spin h-4 w-4" /> : 'Create Collection'}
+            {isCreating ? <Loader2 className="animate-spin h-4 w-4" /> : 'Створити колекцію'}
           </Button>
         </DialogFooter>
       </DialogContent>

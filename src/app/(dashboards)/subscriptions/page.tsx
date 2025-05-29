@@ -62,7 +62,6 @@ export default function SubscriptionsPage() {
     }
   };
 
-  // Handle page changes
   const goToPage = (page: number) => {
     setCurrentPage(Math.max(1, Math.min(page, data?.totalPages || 1)));
   };
@@ -76,15 +75,15 @@ export default function SubscriptionsPage() {
               <CreditCard className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">Subscriptions</h1>
-              <p className="text-muted-foreground">Manage user subscriptions and billing</p>
+              <h1 className="text-2xl font-bold">Підписки</h1>
+              <p className="text-muted-foreground">Керуйте підписками користувачів та оплатами</p>
             </div>
           </div>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Active Subscriptions</CardTitle>
+            <CardTitle>Активні підписки</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -92,7 +91,7 @@ export default function SubscriptionsPage() {
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Search by email..."
+                    placeholder="Пошук за email..."
                     value={searchQuery}
                     onChange={e => {
                       setSearchQuery(e.target.value);
@@ -109,14 +108,14 @@ export default function SubscriptionsPage() {
                   }}
                 >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Filter by status" />
+                    <SelectValue placeholder="Фільтр за статусом" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Statuses</SelectItem>
-                    <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="canceled">Canceled</SelectItem>
-                    <SelectItem value="paused">Paused</SelectItem>
-                    <SelectItem value="expired">Expired</SelectItem>
+                    <SelectItem value="all">Усі статуси</SelectItem>
+                    <SelectItem value="active">Активні</SelectItem>
+                    <SelectItem value="canceled">Скасовані</SelectItem>
+                    <SelectItem value="paused">Призупинені</SelectItem>
+                    <SelectItem value="expired">Протерміновані</SelectItem>
                   </SelectContent>
                 </Select>
                 <Select
@@ -127,13 +126,13 @@ export default function SubscriptionsPage() {
                   }}
                 >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Items per page" />
+                    <SelectValue placeholder="Кількість на сторінку" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="5">5 per page</SelectItem>
-                    <SelectItem value="10">10 per page</SelectItem>
-                    <SelectItem value="20">20 per page</SelectItem>
-                    <SelectItem value="50">50 per page</SelectItem>
+                    <SelectItem value="5">5 на сторінку</SelectItem>
+                    <SelectItem value="10">10 на сторінку</SelectItem>
+                    <SelectItem value="20">20 на сторінку</SelectItem>
+                    <SelectItem value="50">50 на сторінку</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -142,12 +141,12 @@ export default function SubscriptionsPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>User</TableHead>
-                      <TableHead>Plan</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Start Date</TableHead>
-                      <TableHead>Renewal Date</TableHead>
-                      <TableHead>Auto Renew</TableHead>
+                      <TableHead>Користувач</TableHead>
+                      <TableHead>План</TableHead>
+                      <TableHead>Статус</TableHead>
+                      <TableHead>Дата початку</TableHead>
+                      <TableHead>Дата продовження</TableHead>
+                      <TableHead>Автооновлення</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -163,7 +162,7 @@ export default function SubscriptionsPage() {
                       <TableRow>
                         <TableCell colSpan={6}>
                           <div className="text-center py-6 text-muted-foreground">
-                            No subscriptions found
+                            Підписок не знайдено
                           </div>
                         </TableCell>
                       </TableRow>
@@ -189,7 +188,7 @@ export default function SubscriptionsPage() {
                             <div>
                               <p className="font-medium">{subscription.plan.name}</p>
                               <p className="text-sm text-muted-foreground">
-                                ${subscription.plan.price}/month
+                                ${subscription.plan.price}/місяць
                               </p>
                             </div>
                           </TableCell>
@@ -212,7 +211,7 @@ export default function SubscriptionsPage() {
                           </TableCell>
                           <TableCell>
                             <Badge variant={subscription.autoRenew ? 'default' : 'secondary'}>
-                              {subscription.autoRenew ? 'Yes' : 'No'}
+                              {subscription.autoRenew ? 'Так' : 'Ні'}
                             </Badge>
                           </TableCell>
                         </TableRow>
@@ -222,12 +221,11 @@ export default function SubscriptionsPage() {
                 </Table>
               </div>
 
-              {/* Pagination Controls */}
               <div className="flex items-center justify-between">
                 <div className="text-sm text-muted-foreground">
-                  Showing {(currentPage - 1) * itemsPerPage + 1} to{' '}
-                  {Math.min(currentPage * itemsPerPage, data?.total || 0)} of {data?.total || 0}{' '}
-                  subscriptions
+                  Показано {(currentPage - 1) * itemsPerPage + 1}–
+                  {Math.min(currentPage * itemsPerPage, data?.total || 0)} з {data?.total || 0}{' '}
+                  підписок
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -247,9 +245,9 @@ export default function SubscriptionsPage() {
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <span className="flex items-center gap-1">
-                    <div className="text-sm font-medium">Page</div>
+                    <div className="text-sm font-medium">Сторінка</div>
                     <div className="text-sm font-medium">
-                      {currentPage} of {data?.totalPages || 1}
+                      {currentPage} з {data?.totalPages || 1}
                     </div>
                   </span>
                   <Button

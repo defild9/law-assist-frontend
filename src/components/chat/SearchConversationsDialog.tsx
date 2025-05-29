@@ -12,16 +12,17 @@ import {
 } from '../ui/Command';
 import { MessageSquare } from 'lucide-react';
 import { format } from 'date-fns';
+import { useRouter } from 'next/navigation';
 
 interface SearchDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSelectChat: (chatId: string) => void;
 }
 
-export function SearchConversationsDialog({ open, onOpenChange, onSelectChat }: SearchDialogProps) {
+export function SearchConversationsDialog({ open, onOpenChange }: SearchDialogProps) {
   const [inputValue, setInputValue] = useState('');
   const [search, setSearch] = useState<string>('');
+  const router = useRouter();
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -57,30 +58,31 @@ export function SearchConversationsDialog({ open, onOpenChange, onSelectChat }: 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
       <CommandInput
-        placeholder="Search chats..."
+        placeholder="Пошук чатів..."
         value={inputValue}
         onValueChange={setInputValue}
         autoFocus
       />
       <CommandList>
-        {isInitialLoading && <CommandItem disabled>Loading…</CommandItem>}
+        {isInitialLoading && <CommandItem disabled>Завантаження…</CommandItem>}
 
         {!isInitialLoading && allChats.length > 0 && (
-          <CommandGroup heading="Chats">
+          <CommandGroup heading="Чати">
             {allChats.map(chat => {
               const lastMsg =
                 chat.lastMessage?.content ?? chat.messages_details?.slice(-1)[0]?.content ?? '';
-
-              const firstMsg = chat.messages_details?.[0]?.content ?? 'Untitled';
+              const firstMsg = chat.messages_details?.[0]?.content ?? 'Без назви';
               const title = chat.title !== 'New Chat' ? chat.title : firstMsg.slice(0, 30) + '…';
-
               const date = chat.updatedAt ?? chat.createdAt;
 
               return (
                 <CommandItem
                   key={chat.id}
-                  value={title} // <— allow cmdk to match/filter this item
-                  onSelect={() => onSelectChat(chat.id)}
+                  value={title}
+                  onSelect={() => {
+                    onOpenChange(false);
+                    router.push(`/chat/${chat._id}`);
+                  }}
                   className="flex items-center gap-2 py-2"
                 >
                   <MessageSquare className="h-4 w-4" />
@@ -96,12 +98,14 @@ export function SearchConversationsDialog({ open, onOpenChange, onSelectChat }: 
             })}
 
             {hasNextPage && <div ref={loadMoreRef} style={{ height: 1 }} />}
-            {isFetchingNextPage && <CommandItem disabled>Loading more…</CommandItem>}
-            {!hasNextPage && <CommandItem disabled>End of results</CommandItem>}
+            {isFetchingNextPage && <CommandItem disabled>Завантаження ще…</CommandItem>}
+            {!hasNextPage && <CommandItem disabled>Кінець результатів</CommandItem>}
           </CommandGroup>
         )}
 
-        {!isInitialLoading && allChats.length === 0 && <CommandEmpty>No chats found.</CommandEmpty>}
+        {!isInitialLoading && allChats.length === 0 && (
+          <CommandEmpty>Чати не знайдено.</CommandEmpty>
+        )}
       </CommandList>
     </CommandDialog>
   );

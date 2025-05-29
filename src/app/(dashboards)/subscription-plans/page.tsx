@@ -92,9 +92,9 @@ export default function SubscriptionPlansPage() {
         features: [],
         trialPeriodDays: undefined,
       });
-      toast.success('Plan created successfully');
+      toast.success('План успішно створено');
     } catch (error) {
-      toast.error('Failed to create plan');
+      toast.error('Не вдалося створити план');
     }
   };
 
@@ -114,9 +114,9 @@ export default function SubscriptionPlansPage() {
         features: [],
         trialPeriodDays: undefined,
       });
-      toast.success('Plan updated successfully');
+      toast.success('План успішно оновлено');
     } catch (error) {
-      toast.error('Failed to update plan');
+      toast.error('Не вдалося оновити план');
     }
   };
 
@@ -127,9 +127,9 @@ export default function SubscriptionPlansPage() {
       await deleteMutation.mutateAsync(selectedPlan.id);
       setShowDeleteDialog(false);
       setSelectedPlan(null);
-      toast.success('Plan deleted successfully');
+      toast.success('План успішно видалено');
     } catch (error) {
-      toast.error('Failed to delete plan');
+      toast.error('Не вдалося видалити план');
     }
   };
 
@@ -161,20 +161,20 @@ export default function SubscriptionPlansPage() {
               <CreditCard className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">Subscription Plans</h1>
-              <p className="text-muted-foreground">Manage your subscription plans and pricing</p>
+              <h1 className="text-2xl font-bold">Тарифні плани</h1>
+              <p className="text-muted-foreground">Керуйте своїми тарифними планами та цінами</p>
             </div>
           </div>
 
           <Button onClick={() => setShowCreateDialog(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            New Plan
+            Новий план
           </Button>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Plans</CardTitle>
+            <CardTitle>Плани</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -182,7 +182,7 @@ export default function SubscriptionPlansPage() {
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Search plans..."
+                    placeholder="Пошук планів..."
                     value={searchQuery}
                     onChange={e => {
                       setSearchQuery(e.target.value);
@@ -199,13 +199,13 @@ export default function SubscriptionPlansPage() {
                   }}
                 >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Items per page" />
+                    <SelectValue placeholder="Кількість на сторінці" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="5">5 per page</SelectItem>
-                    <SelectItem value="10">10 per page</SelectItem>
-                    <SelectItem value="20">20 per page</SelectItem>
-                    <SelectItem value="50">50 per page</SelectItem>
+                    <SelectItem value="5">5 на сторінку</SelectItem>
+                    <SelectItem value="10">10 на сторінку</SelectItem>
+                    <SelectItem value="20">20 на сторінку</SelectItem>
+                    <SelectItem value="50">50 на сторінку</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -214,12 +214,12 @@ export default function SubscriptionPlansPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Price</TableHead>
-                      <TableHead>Features</TableHead>
-                      <TableHead>Trial Period</TableHead>
-                      <TableHead>Created At</TableHead>
-                      <TableHead>Actions</TableHead>
+                      <TableHead>Назва</TableHead>
+                      <TableHead>Ціна</TableHead>
+                      <TableHead>Можливості</TableHead>
+                      <TableHead>Пробний період</TableHead>
+                      <TableHead>Дата створення</TableHead>
+                      <TableHead>Дії</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -235,7 +235,7 @@ export default function SubscriptionPlansPage() {
                       <TableRow>
                         <TableCell colSpan={6}>
                           <div className="text-center py-6 text-muted-foreground">
-                            No plans found
+                            Планів не знайдено
                           </div>
                         </TableCell>
                       </TableRow>
@@ -262,7 +262,7 @@ export default function SubscriptionPlansPage() {
                           </TableCell>
                           <TableCell>
                             {plan.trialPeriodDays ? (
-                              <Badge variant="secondary">{plan.trialPeriodDays} days</Badge>
+                              <Badge variant="secondary">{plan.trialPeriodDays} днів</Badge>
                             ) : (
                               '-'
                             )}
@@ -300,9 +300,9 @@ export default function SubscriptionPlansPage() {
               {/* Pagination Controls */}
               <div className="flex items-center justify-between">
                 <div className="text-sm text-muted-foreground">
-                  Showing {(currentPage - 1) * itemsPerPage + 1} to{' '}
-                  {Math.min(currentPage * itemsPerPage, data?.total || 0)} of {data?.total || 0}{' '}
-                  plans
+                  Показано {(currentPage - 1) * itemsPerPage + 1}–
+                  {Math.min(currentPage * itemsPerPage, data?.total || 0)} із {data?.total || 0}{' '}
+                  планів
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -322,9 +322,9 @@ export default function SubscriptionPlansPage() {
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <span className="flex items-center gap-1">
-                    <div className="text-sm font-medium">Page</div>
+                    <div className="text-sm font-medium">Сторінка</div>
                     <div className="text-sm font-medium">
-                      {currentPage} of {totalPages}
+                      {currentPage} з {totalPages}
                     </div>
                   </span>
                   <Button
@@ -368,24 +368,26 @@ export default function SubscriptionPlansPage() {
         >
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>{selectedPlan ? 'Edit Plan' : 'Create New Plan'}</DialogTitle>
+              <DialogTitle>
+                {selectedPlan ? 'Редагування плану' : 'Створення нового плану'}
+              </DialogTitle>
               <DialogDescription>
                 {selectedPlan
-                  ? 'Update the subscription plan details'
-                  : 'Add a new subscription plan to your offerings'}
+                  ? 'Оновіть деталі тарифного плану'
+                  : 'Додайте новий тарифний план до ваших пропозицій'}
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <label className="text-sm font-medium">Name</label>
+                <label className="text-sm font-medium">Назва</label>
                 <Input
                   value={formData.name}
                   onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="Enter plan name"
+                  placeholder="Введіть назву плану"
                 />
               </div>
               <div className="grid gap-2">
-                <label className="text-sm font-medium">Description</label>
+                <label className="text-sm font-medium">Опис</label>
                 <Textarea
                   value={formData.description}
                   onChange={e =>
@@ -394,11 +396,11 @@ export default function SubscriptionPlansPage() {
                       description: e.target.value,
                     }))
                   }
-                  placeholder="Enter plan description"
+                  placeholder="Введіть опис плану"
                 />
               </div>
               <div className="grid gap-2">
-                <label className="text-sm font-medium">Price</label>
+                <label className="text-sm font-medium">Ціна</label>
                 <Input
                   type="number"
                   value={formData.price}
@@ -408,11 +410,11 @@ export default function SubscriptionPlansPage() {
                       price: parseFloat(e.target.value),
                     }))
                   }
-                  placeholder="Enter price"
+                  placeholder="Введіть ціну"
                 />
               </div>
               <div className="grid gap-2">
-                <label className="text-sm font-medium">Features (comma-separated)</label>
+                <label className="text-sm font-medium">Можливості (через кому)</label>
                 <Input
                   value={formData.features.join(', ')}
                   onChange={e =>
@@ -421,11 +423,11 @@ export default function SubscriptionPlansPage() {
                       features: e.target.value.split(',').map(f => f.trim()),
                     }))
                   }
-                  placeholder="Enter features"
+                  placeholder="Введіть можливості"
                 />
               </div>
               <div className="grid gap-2">
-                <label className="text-sm font-medium">Trial Period (days)</label>
+                <label className="text-sm font-medium">Пробний період (днів)</label>
                 <Input
                   type="number"
                   value={formData.trialPeriodDays || ''}
@@ -435,7 +437,7 @@ export default function SubscriptionPlansPage() {
                       trialPeriodDays: e.target.value ? parseInt(e.target.value) : undefined,
                     }))
                   }
-                  placeholder="Enter trial period"
+                  placeholder="Введіть кількість днів"
                 />
               </div>
             </div>
@@ -447,26 +449,24 @@ export default function SubscriptionPlansPage() {
                   setSelectedPlan(null);
                 }}
               >
-                Cancel
+                Скасувати
               </Button>
               <Button
                 onClick={selectedPlan ? handleUpdatePlan : handleCreatePlan}
                 disabled={!formData.name || !formData.description || formData.price <= 0}
               >
-                {selectedPlan ? 'Update Plan' : 'Create Plan'}
+                {selectedPlan ? 'Оновити план' : 'Створити план'}
               </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
 
-        {/* Delete Plan Dialog */}
         <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Delete Plan</AlertDialogTitle>
+              <AlertDialogTitle>Видалити план</AlertDialogTitle>
               <AlertDialogDescription>
-                Are you sure you want to delete this subscription plan? This action cannot be
-                undone.
+                Ви впевнені, що хочете видалити цей тарифний план? Цю дію неможливо скасувати.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
@@ -476,10 +476,10 @@ export default function SubscriptionPlansPage() {
                   setSelectedPlan(null);
                 }}
               >
-                Cancel
+                Скасувати
               </AlertDialogCancel>
               <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={handleDeletePlan}>
-                Delete Plan
+                Видалити план
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { RefreshCw, Trash2, Database, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -23,29 +23,23 @@ export function CollectionCard({ collection }: CollectionCardProps) {
 
   const { mutate: deleteCollection, isPending: isDeletingCollection } = useDeleteCollection({
     onSuccess: () => {
-      toast.success('Collection deleted successfully');
-      queryClient.invalidateQueries({
-        queryKey: ['vectorStoreCollectionsWithFiles'],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['vectorStoreCollections'],
-      });
+      toast.success('Колекцію успішно видалено');
+      queryClient.invalidateQueries({ queryKey: ['vectorStoreCollectionsWithFiles'] });
+      queryClient.invalidateQueries({ queryKey: ['vectorStoreCollections'] });
     },
     onError: () => {
-      toast.error('Failed to delete collection');
+      toast.error('Не вдалося видалити колекцію');
     },
   });
 
   const { mutate: deleteFileFromCollection, isPending: isDeletingFile } =
     useDeleteFileFromCollection({
       onSuccess: () => {
-        toast.success('File deleted successfully');
-        queryClient.invalidateQueries({
-          queryKey: ['vectorStoreCollectionsWithFiles'],
-        });
+        toast.success('Файл успішно видалено');
+        queryClient.invalidateQueries({ queryKey: ['vectorStoreCollectionsWithFiles'] });
       },
       onError: () => {
-        toast.error('Failed to delete file');
+        toast.error('Не вдалося видалити файл');
       },
     });
 
@@ -72,7 +66,9 @@ export function CollectionCard({ collection }: CollectionCardProps) {
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground">{collection.files.length} files</p>
+      <p className="text-sm text-muted-foreground">
+        {collection.files.length} {collection.files.length === 1 ? 'файл' : 'файли'}
+      </p>
 
       <div className="space-y-2">
         {collection.files.map((file, idx) => (

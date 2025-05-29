@@ -15,7 +15,7 @@ const ChatSidebar: React.FC = () => {
           onClick={() => router.replace('/chat')}
         >
           <PlusIcon className="h-4 w-4" />
-          New Chat
+          Новий чат
         </Button>
       </div>
 
@@ -24,7 +24,7 @@ const ChatSidebar: React.FC = () => {
       <div className="p-4 border-t mt-auto">
         <Button className="w-full gap-2" onClick={() => router.push('/video-consultation/book')}>
           <Scale className="h-4 w-4" />
-          Request Legal Consultation
+          Записатися на консультацію
         </Button>
       </div>
     </div>

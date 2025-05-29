@@ -16,6 +16,15 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#FF6B6B'];
 
+export const FeedbackTagLabels: Record<FeedbackTag, string> = {
+  [FeedbackTag.TOO_SHORT]: 'Занадто коротко',
+  [FeedbackTag.OFF_TOPIC]: 'Не по темі',
+  [FeedbackTag.HELPFUL]: 'Корисно',
+  [FeedbackTag.HARMFUL]: 'Шкідливо',
+  [FeedbackTag.SPAM]: 'Спам',
+  [FeedbackTag.OTHER]: 'Інше',
+};
+
 interface FeedbackStatsProps {
   feedbackList: Feedback[];
 }
@@ -23,8 +32,11 @@ interface FeedbackStatsProps {
 export const FeedbackStats: React.FC<FeedbackStatsProps> = ({ feedbackList }) => {
   const typeStats = useMemo(
     () => [
-      { name: 'Likes', value: feedbackList.filter(f => f.type === FeedbackType.LIKE).length },
-      { name: 'Dislikes', value: feedbackList.filter(f => f.type === FeedbackType.DISLIKE).length },
+      { name: 'Подобається', value: feedbackList.filter(f => f.type === FeedbackType.LIKE).length },
+      {
+        name: 'Не подобається',
+        value: feedbackList.filter(f => f.type === FeedbackType.DISLIKE).length,
+      },
     ],
     [feedbackList]
   );
@@ -32,7 +44,7 @@ export const FeedbackStats: React.FC<FeedbackStatsProps> = ({ feedbackList }) =>
   const tagStats = useMemo(
     () =>
       Object.values(FeedbackTag).map((tag, i) => ({
-        name: tag,
+        name: FeedbackTagLabels[tag],
         value: feedbackList.filter(f => f.tag === tag).length,
       })),
     [feedbackList]
@@ -42,7 +54,7 @@ export const FeedbackStats: React.FC<FeedbackStatsProps> = ({ feedbackList }) =>
     <div className="grid md:grid-cols-2 gap-6">
       <Card>
         <CardHeader>
-          <CardTitle>By Type</CardTitle>
+          <CardTitle>За типом</CardTitle>
         </CardHeader>
         <CardContent className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -60,7 +72,7 @@ export const FeedbackStats: React.FC<FeedbackStatsProps> = ({ feedbackList }) =>
 
       <Card>
         <CardHeader>
-          <CardTitle>By Tag</CardTitle>
+          <CardTitle>За тегами</CardTitle>
         </CardHeader>
         <CardContent className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">

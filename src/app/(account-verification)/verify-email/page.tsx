@@ -22,7 +22,7 @@ export default function VerifyEmailPage() {
       }
       setVerificationState('success');
     },
-    onError: error => {
+    onError: () => {
       setVerificationState('error');
     },
   });
@@ -44,8 +44,12 @@ export default function VerifyEmailPage() {
             <div className="space-y-4">
               <div className="w-12 h-12 border-4 border-primary/30 border-t-transparent rounded-full animate-spin mx-auto"></div>
 
-              <h1 className="text-2xl font-semibold tracking-tight">Verifying your email</h1>
-              <p className="text-muted-foreground">Please wait while we verify your email...</p>
+              <h1 className="text-2xl font-semibold tracking-tight">
+                Підтвердження електронної пошти
+              </h1>
+              <p className="text-muted-foreground">
+                Будь ласка, зачекайте, ми перевіряємо вашу пошту…
+              </p>
             </div>
           ))}
 
@@ -54,15 +58,15 @@ export default function VerifyEmailPage() {
             <div className="w-12 h-12 rounded-full bg-gray-600/40 flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-6 h-6 text-primary" />
             </div>
-            <h1 className="text-2xl font-semibold tracking-tight">Email verified</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">Пошту підтверджено</h1>
             <p className="text-muted-foreground">
-              Your email has been successfully verified. You can now log in to your account.
+              Вашу електронну пошту успішно підтверджено. Тепер ви можете увійти в обліковий запис.
             </p>
             <Link
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
               href={session?.user ? '/chat' : '/sign-in'}
             >
-              {session?.user ? 'Go to Chat' : 'Continue to Sing In'}
+              {session?.user ? 'Перейти до чату' : 'Перейти до входу'}
             </Link>
           </div>
         )}
@@ -72,25 +76,24 @@ export default function VerifyEmailPage() {
             <div className="w-12 h-12 rounded-full bg-red-500/25 flex items-center justify-center mx-auto">
               <XCircle className="w-6 h-6 text-red-600/40" />
             </div>
-            <h1 className="text-2xl font-semibold tracking-tight">Verification failed</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">Помилка підтвердження</h1>
             <p className="text-muted-foreground">
-              The verification link is invalid or has expired. Please try again or request a new
-              verification link.
+              Посилання для підтвердження недійсне або застаріле. Спробуйте ще раз або надішліть
+              нове посилання.
             </p>
             <div className="space-y-2 pt-4">
-              {/* TODO: Need to add logic for sending new link */}
               <Link
                 className="w-full h-10 px-4 py-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-white hover:text-black"
                 href="/check-email"
               >
-                Request new link
+                Надіслати нове посилання
               </Link>
 
               <Link
                 className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
                 href="/sign-in"
               >
-                Return to Sign In
+                Повернутися до входу
               </Link>
             </div>
           </div>

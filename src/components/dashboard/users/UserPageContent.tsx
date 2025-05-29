@@ -24,6 +24,7 @@ export default function UserPageContent() {
   const goToPage = (page: number) => {
     setCurrentPage(Math.max(1, Math.min(page, users?.totalPages || 0)));
   };
+
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -32,13 +33,13 @@ export default function UserPageContent() {
         </div>
         <Card>
           <CardHeader>
-            <CardTitle>User Management</CardTitle>
+            <CardTitle>Управління користувачами</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <SearchBar
                 value={searchUser}
-                placeholder="Search users..."
+                placeholder="Пошук користувачів..."
                 onChange={setSearchUser}
                 itemsPerPage={itemsPerPage}
                 setItemsPerPage={setItemsPerPage}

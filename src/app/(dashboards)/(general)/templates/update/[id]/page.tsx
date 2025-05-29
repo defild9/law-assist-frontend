@@ -20,14 +20,14 @@ export default function UpdateTemplatePage() {
   const updateTemplate = useUpdateDocumentTemplate({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['templates'] });
-      toast.success('Template updated successfully');
+      toast.success('Шаблон успішно оновлено');
       router.push('/templates');
     },
-    onError: () => toast.error('Failed to update template'),
+    onError: () => toast.error('Не вдалося оновити шаблон'),
   });
 
   if (loadingTemplate || !data) {
-    return <div>Loading...</div>;
+    return <div>Завантаження...</div>;
   }
 
   const tpl: Template = data;
@@ -39,7 +39,7 @@ export default function UpdateTemplatePage() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-2xl font-bold mb-4">Update Document Template</h1>
+        <h1 className="text-2xl font-bold mb-4">Оновити шаблон документа</h1>
         <TemplateForm
           initialValues={{
             title: tpl.title,
@@ -49,7 +49,7 @@ export default function UpdateTemplatePage() {
           }}
           onSubmit={handleSubmit}
           isSubmitting={updateTemplate.isPending}
-          submitLabel="Update Template"
+          submitLabel="Оновити шаблон"
         />
       </div>
     </div>

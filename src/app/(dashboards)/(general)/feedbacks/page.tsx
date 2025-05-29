@@ -29,8 +29,9 @@ export default function FeedbackPage() {
       </div>
     );
   }
+
   if (error) {
-    return <div className="text-red-500">Ошибка загрузки фидбека</div>;
+    return <div className="text-red-500">Помилка завантаження відгуків</div>;
   }
 
   return (

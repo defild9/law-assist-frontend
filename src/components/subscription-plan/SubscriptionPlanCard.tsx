@@ -13,8 +13,8 @@ interface SubscriptionPlanCardProps {
 }
 
 const FEATURE_DESCRIPTIONS: Record<string, string> = {
-  featureA: 'Access to all basic features',
-  featureB: 'Priority customer support',
+  featureA: 'Доступ до всіх базових функцій',
+  featureB: 'Пріоритетна підтримка користувачів',
 };
 
 export default function SubscriptionPlanCard({ plan, billingPeriod }: SubscriptionPlanCardProps) {
@@ -23,7 +23,7 @@ export default function SubscriptionPlanCard({ plan, billingPeriod }: Subscripti
       window.location.href = data.url;
     },
     onError: () => {
-      toast.error('Failed to initiate checkout');
+      toast.error('Не вдалося ініціювати оформлення');
     },
   });
 
@@ -39,7 +39,7 @@ export default function SubscriptionPlanCard({ plan, billingPeriod }: Subscripti
     <Card className="relative flex flex-col">
       {plan.trialPeriodDays && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary px-3 py-1 rounded-full text-xs text-primary-foreground">
-          {plan.trialPeriodDays} days free trial
+          {plan.trialPeriodDays} днів безкоштовного доступу
         </div>
       )}
 
@@ -50,7 +50,7 @@ export default function SubscriptionPlanCard({ plan, billingPeriod }: Subscripti
             <div className="text-right">
               <div className="text-2xl font-bold">${getAdjustedPrice(plan.price).toFixed(2)}</div>
               <div className="text-sm text-muted-foreground">
-                per {billingPeriod === 'yearly' ? 'year' : 'month'}
+                за {billingPeriod === 'yearly' ? 'рік' : 'місяць'}
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@ export default function SubscriptionPlanCard({ plan, billingPeriod }: Subscripti
       <CardFooter>
         <Button className="w-full gap-2" onClick={handleSubscribe} disabled={checkout.isPending}>
           <CreditCard className="h-4 w-4" />
-          {checkout.isPending ? 'Redirecting...' : 'Subscribe Now'}
+          {checkout.isPending ? 'Переадресація…' : 'Оформити підписку'}
         </Button>
       </CardFooter>
     </Card>

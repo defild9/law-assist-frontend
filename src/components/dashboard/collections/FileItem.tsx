@@ -17,7 +17,7 @@ export function FileItem({ source, lastUpdated, onDelete, isLoading }: FileItemP
         <div>
           <p className="text-sm font-medium">{source}</p>
           <p className="text-xs text-muted-foreground">
-            Last updated: {format(new Date(lastUpdated), 'MMM d, yyyy')}
+            Оновлено: {format(new Date(lastUpdated), 'd MMM yyyy')}
           </p>
         </div>
       </div>

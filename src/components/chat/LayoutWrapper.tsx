@@ -25,14 +25,6 @@ import {
   DropdownMenuTrigger,
 } from '../ui/DropdownMenu';
 import Link from 'next/link';
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '../ui/Command';
 import { SearchConversationsDialog } from './SearchConversationsDialog';
 
 export function LayoutWrapper({ children }: { children: React.ReactNode }) {
@@ -57,7 +49,6 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
                 <PanelRightIcon className="h-5 w-5" />
               )}
             </Button>
-            {/* TODO: search opening */}
             <Button variant="ghost" size="icon" onClick={() => setIsSearchOpen(true)}>
               <Search className="h-4 w-4" />
             </Button>
@@ -74,23 +65,24 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>Мій акаунт</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <Link href="/profile">
                   <DropdownMenuItem>
                     <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
+                    <span>Профіль</span>
                   </DropdownMenuItem>
                 </Link>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout}>
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
+                  <span>Вийти</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </div>
+
         <SearchConversationsDialog
           open={isSearchOpen}
           onOpenChange={setIsSearchOpen}

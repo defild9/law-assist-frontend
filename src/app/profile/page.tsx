@@ -11,13 +11,13 @@ export default function Page() {
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Profile Settings</h1>
+          <h1 className="text-2xl font-bold">Налаштування профілю</h1>
         </div>
 
         <Tabs defaultValue="profile" className="space-y-6">
           <TabsList>
-            <TabsTrigger value="profile">Profile</TabsTrigger>
-            <TabsTrigger value="consultations">Consultations</TabsTrigger>
+            <TabsTrigger value="profile">Профіль</TabsTrigger>
+            <TabsTrigger value="consultations">Консультації</TabsTrigger>
           </TabsList>
 
           <TabsContent value="profile">

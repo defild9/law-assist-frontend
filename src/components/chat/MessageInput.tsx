@@ -96,7 +96,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, autoFocus = 
           onChange={e => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           onInput={handleInput}
-          placeholder="Type a message..."
+          placeholder="Введіть повідомлення..."
           className="flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none resize-none max-h-[200px] min-h-[40px] py-2 px-3 text-base"
           rows={1}
         />
@@ -113,7 +113,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, autoFocus = 
           type="file"
           multiple
           className="hidden"
-          accept=".jpeg', .png,application/pdf"
+          accept=".jpeg, .png, application/pdf"
           onChange={handleFileChange}
         />
       </div>

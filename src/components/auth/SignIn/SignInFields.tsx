@@ -21,7 +21,7 @@ export const SignInFields: React.FC<Props> = ({ register, errors }) => (
     <Input
       {...register('password')}
       type="password"
-      placeholder="Enter your password"
+      placeholder="Введіть пароль"
       hasError={!!errors.password}
     />
     {errors.password?.message && (

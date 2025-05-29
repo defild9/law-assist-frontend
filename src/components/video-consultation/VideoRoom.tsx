@@ -59,7 +59,7 @@ export default function VideoRoom({ roomId, consultation }: VideoRoomProps) {
         if (videoDevices.length) setCamId(videoDevices[0].deviceId);
         if (audioDevices.length) setMicId(audioDevices[0].deviceId);
       })
-      .catch(err => console.error('Error accessing media devices:', err));
+      .catch(err => console.error('Помилка доступу до медіапристроїв:', err));
   }, []);
 
   const canJoin = name.trim() && camId && micId;
@@ -94,14 +94,14 @@ export default function VideoRoom({ roomId, consultation }: VideoRoomProps) {
                 <Scale className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <CardTitle>Legal Consultation</CardTitle>
-                <CardDescription>Join your video consultation with a legal expert</CardDescription>
+                <CardTitle>Юридична консультація</CardTitle>
+                <CardDescription>Приєднайтесь до відеоконсультації з юристом</CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Video Preview */}
+              {/* Перегляд відео */}
               <div className="space-y-4">
                 <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
                   <video
@@ -115,7 +115,7 @@ export default function VideoRoom({ roomId, consultation }: VideoRoomProps) {
                     <div className="absolute inset-0 flex items-center justify-center bg-muted">
                       <Avatar className="h-24 w-24">
                         <AvatarFallback className="text-4xl">
-                          {name.charAt(0).toUpperCase() || 'G'}
+                          {name.charAt(0).toUpperCase() || 'К'}
                         </AvatarFallback>
                       </Avatar>
                     </div>
@@ -147,14 +147,14 @@ export default function VideoRoom({ roomId, consultation }: VideoRoomProps) {
                 <div className="grid grid-cols-2 gap-4">
                   <Select value={camId} onValueChange={setCamId}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select camera" />
+                      <SelectValue placeholder="Оберіть камеру" />
                     </SelectTrigger>
                     <SelectContent>
                       {cams.map(cam => (
                         <SelectItem key={cam.deviceId} value={cam.deviceId}>
                           <div className="flex items-center gap-2">
                             <Camera className="h-4 w-4" />
-                            <span>{cam.label || 'Camera ' + (cams.indexOf(cam) + 1)}</span>
+                            <span>{cam.label || 'Камера ' + (cams.indexOf(cam) + 1)}</span>
                           </div>
                         </SelectItem>
                       ))}
@@ -163,14 +163,14 @@ export default function VideoRoom({ roomId, consultation }: VideoRoomProps) {
 
                   <Select value={micId} onValueChange={setMicId}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select microphone" />
+                      <SelectValue placeholder="Оберіть мікрофон" />
                     </SelectTrigger>
                     <SelectContent>
                       {mics.map(mic => (
                         <SelectItem key={mic.deviceId} value={mic.deviceId}>
                           <div className="flex items-center gap-2">
                             <Mic className="h-4 w-4" />
-                            <span>{mic.label || 'Microphone ' + (mics.indexOf(mic) + 1)}</span>
+                            <span>{mic.label || 'Мікрофон ' + (mics.indexOf(mic) + 1)}</span>
                           </div>
                         </SelectItem>
                       ))}
@@ -179,11 +179,11 @@ export default function VideoRoom({ roomId, consultation }: VideoRoomProps) {
                 </div>
               </div>
 
-              {/* Join Form */}
+              {/* Форма приєднання */}
               <div className="space-y-6">
                 <div>
                   <h2 className="text-lg font-semibold mb-4">
-                    {isLawyer ? 'User Information' : 'Lawyer Information'}
+                    {isLawyer ? 'Інформація про користувача' : 'Інформація про юриста'}
                   </h2>
                   <div className="flex items-start gap-4 p-4 rounded-lg border">
                     <Avatar className="h-12 w-12">
@@ -204,7 +204,8 @@ export default function VideoRoom({ roomId, consultation }: VideoRoomProps) {
                       )}
                       {isLawyer && (
                         <div className="flex items-center gap-1 mt-1">
-                          User notes:{consultation.notes ? consultation.notes : 'No notes'}
+                          Нотатки користувача:{' '}
+                          {consultation.notes ? consultation.notes : 'Без нотаток'}
                         </div>
                       )}
                     </div>
@@ -215,7 +216,7 @@ export default function VideoRoom({ roomId, consultation }: VideoRoomProps) {
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Input
-                        placeholder="Your name"
+                        placeholder="Ваше ім’я"
                         value={name}
                         onChange={e => setName(e.target.value)}
                       />
@@ -229,11 +230,12 @@ export default function VideoRoom({ roomId, consultation }: VideoRoomProps) {
                   disabled={!canJoin}
                   onClick={() => setStep('chat')}
                 >
-                  Join Consultation
+                  Приєднатися до консультації
                 </Button>
 
                 <p className="text-xs text-center text-muted-foreground">
-                  By joining, you agree to our Terms of Service and Privacy Policy
+                  Приєднуючись, ви погоджуєтесь з нашими Умовами надання послуг та Політикою
+                  конфіденційності
                 </p>
               </div>
             </div>

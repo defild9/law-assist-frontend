@@ -47,14 +47,14 @@ export default function CollectionTabContent() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Database className="h-5 w-5" />
-            Collections
+            Колекції
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <SearchBar
               value={searchCollection}
-              placeholder="Search collections..."
+              placeholder="Пошук колекцій..."
               onChange={setSearchCollection}
               itemsPerPage={limit}
               setItemsPerPage={setLimit}
@@ -66,7 +66,7 @@ export default function CollectionTabContent() {
                 <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
               </div>
             ) : vectoreStores?.data?.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">No collections found</div>
+              <div className="text-center py-8 text-muted-foreground">Колекції не знайдено</div>
             ) : (
               vectoreStores?.data.map(collection => (
                 <CollectionCard key={collection.id} collection={collection} />

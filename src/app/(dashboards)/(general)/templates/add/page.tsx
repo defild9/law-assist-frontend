@@ -13,10 +13,10 @@ export default function AddTemplatePage() {
   const createTemplate = useCreateDocumentTemplate({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['templates'] });
-      toast.success('Template saved successfully');
+      toast.success('Шаблон успішно збережено');
       router.push('/templates');
     },
-    onError: () => toast.error('Failed to save template'),
+    onError: () => toast.error('Не вдалося зберегти шаблон'),
   });
 
   const handleSubmit = (values: Omit<TemplateFormValues, 'files'>) => {
@@ -26,11 +26,11 @@ export default function AddTemplatePage() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-2xl font-bold mb-4">Create Document Template</h1>
+        <h1 className="text-2xl font-bold mb-4">Створити шаблон документа</h1>
         <TemplateForm
           onSubmit={handleSubmit}
           isSubmitting={createTemplate.isPending}
-          submitLabel="Save Template"
+          submitLabel="Зберегти шаблон"
         />
       </div>
     </div>

@@ -179,11 +179,11 @@ export default function VideoChat({
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
                 <Settings className="h-4 w-4 mr-2" />
-                Audio Settings
+                Налаштування аудіо
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="h-4 w-4 mr-2" />
-                Video Settings
+                Налаштування відео
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -20,6 +20,7 @@ import {
 } from '../ui/AlertDialog';
 import { useDeleteConversation } from '@/hooks/useDeleteConversation';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 interface ChatListProps {
   activeChat?: string | null;
@@ -31,20 +32,19 @@ export function ChatList({ activeChat }: ChatListProps) {
   const { data, isLoading, isError } = useConversations(1, 20);
   const { mutate: deleteConversation } = useDeleteConversation({
     onSuccess: () => {
-      // TODO: TOASER
-      console.log('Deleted chat successfully!');
+      toast.success('Чат успішно видалено');
     },
     onError: error => {
-      // TODO: TOASER
-      console.error('Error during deleting:', error);
+      toast.error('Помилка під час видалення чату');
+      console.error('Помилка видалення чату:', error);
     },
   });
 
   if (isLoading) {
-    return <div className="flex-1 p-4">Loading chats…</div>;
+    return <div className="flex-1 p-4">Завантаження чатів…</div>;
   }
   if (isError || !data) {
-    return <div className="flex-1 p-4">Error loading chats.</div>;
+    return <div className="flex-1 p-4">Помилка завантаження чатів.</div>;
   }
 
   const todayChats = data.conversations.filter(convo => isToday(new Date(convo.updatedAt)));
@@ -106,13 +106,13 @@ export function ChatList({ activeChat }: ChatListProps) {
 
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Delete Chat</AlertDialogTitle>
+                <AlertDialogTitle>Видалити чат</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Are you sure you want to delete this chat? This action cannot be undone.
+                  Ви впевнені, що хочете видалити цей чат? Цю дію не можна скасувати.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogCancel>Скасувати</AlertDialogCancel>
                 <AlertDialogAction
                   onClick={() => {
                     if (chatIdToDelete) {
@@ -121,7 +121,7 @@ export function ChatList({ activeChat }: ChatListProps) {
                     }
                   }}
                 >
-                  Delete
+                  Видалити
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
@@ -134,28 +134,28 @@ export function ChatList({ activeChat }: ChatListProps) {
     <div className="flex-1 overflow-y-auto p-2 space-y-6">
       {todayChats.length > 0 && (
         <div>
-          <h2 className="text-xs font-semibold text-muted-foreground mb-2 px-2">Today</h2>
+          <h2 className="text-xs font-semibold text-muted-foreground mb-2 px-2">Сьогодні</h2>
           {renderChats(todayChats)}
         </div>
       )}
 
       {yesterdayChats.length > 0 && (
         <div>
-          <h2 className="text-xs font-semibold text-muted-foreground mb-2 px-2">Yesterday</h2>
+          <h2 className="text-xs font-semibold text-muted-foreground mb-2 px-2">Вчора</h2>
           {renderChats(yesterdayChats)}
         </div>
       )}
 
       {last7DaysChats.length > 0 && (
         <div>
-          <h2 className="text-xs font-semibold text-muted-foreground mb-2 px-2">Last 7 Days</h2>
+          <h2 className="text-xs font-semibold text-muted-foreground mb-2 px-2">Останні 7 днів</h2>
           {renderChats(last7DaysChats)}
         </div>
       )}
 
       {olderChats.length > 0 && (
         <div>
-          <h2 className="text-xs font-semibold text-muted-foreground mb-2 px-2">Older</h2>
+          <h2 className="text-xs font-semibold text-muted-foreground mb-2 px-2">Старіші</h2>
           {renderChats(olderChats)}
         </div>
       )}

@@ -11,11 +11,11 @@ export default function VideoConsultationEnded() {
             <VideoOff className="w-8 h-8 text-destructive" />
           </div>
 
-          <h1 className="text-2xl font-semibold tracking-tight">Video Consultation Ended</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Відеоконсультацію завершено</h1>
 
           <p className="text-muted-foreground">
-            This video consultation has ended or is no longer accessible. Thank you for using our
-            service.
+            Ця відеоконсультація завершена або більше недоступна. Дякуємо, що скористалися нашим
+            сервісом.
           </p>
         </div>
 
@@ -26,23 +26,23 @@ export default function VideoConsultationEnded() {
               className="w-full flex items-center justify-center gap-2"
             >
               <Calendar className="h-4 w-4" />
-              Book Another Consultation
+              Записатись на нову консультацію
             </Link>
           </Button>
 
           <Button variant="outline" className="w-full">
             <Link href="/profile" className="w-full flex items-center justify-center gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Return to Profile
+              Повернутися до профілю
             </Link>
           </Button>
         </div>
 
         <div className="pt-4 border-t text-sm text-muted-foreground">
           <p>
-            If you believe this is an error or need assistance,{' '}
+            Якщо ви вважаєте, що сталася помилка, або вам потрібна допомога,{' '}
             <Link href="/support" className="underline underline-offset-4 hover:text-primary">
-              contact support
+              зверніться до підтримки
             </Link>
           </p>
         </div>

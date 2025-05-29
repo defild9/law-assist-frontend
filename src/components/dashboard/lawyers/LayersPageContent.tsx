@@ -22,6 +22,7 @@ export default function LawyersPageContent() {
   const goToPage = (page: number) => {
     setCurrentPage(Math.max(1, Math.min(page, lawyers?.totalPages || 0)));
   };
+
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -30,14 +31,14 @@ export default function LawyersPageContent() {
         </div>
         <Card>
           <CardHeader>
-            <CardTitle>Lawyer Profiles</CardTitle>
+            <CardTitle>Профілі юристів</CardTitle>
           </CardHeader>
 
           <CardContent>
             <div className="space-y-4">
               <SearchBar
                 value={searchLawyer}
-                placeholder="Search lawyers..."
+                placeholder="Пошук юристів..."
                 onChange={setSearchLawyer}
                 itemsPerPage={itemsPerPage}
                 setItemsPerPage={setItemsPerPage}

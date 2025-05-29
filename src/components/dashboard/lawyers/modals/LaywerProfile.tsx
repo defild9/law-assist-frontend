@@ -53,18 +53,20 @@ export const LawyerFormModal = ({
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>{isNew ? 'Create Lawyer Profile' : 'Edit Lawyer Profile'}</DialogTitle>
+          <DialogTitle>
+            {isNew ? 'Створити профіль юриста' : 'Редагувати профіль юриста'}
+          </DialogTitle>
           <DialogDescription>
             {isNew
-              ? 'Select a user and fill out their lawyer profile.'
-              : 'Update the lawyer profile fields below.'}
+              ? 'Оберіть користувача та заповніть його профіль юриста.'
+              : 'Оновіть поля профілю юриста нижче.'}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 mt-4">
           <Select value={userId || ''} onValueChange={onUserChange} disabled={true}>
             <SelectTrigger>
-              <SelectValue placeholder="Select user…" />
+              <SelectValue placeholder="Оберіть користувача…" />
             </SelectTrigger>
             <SelectContent>
               {availableUsers.map(u => (
@@ -77,54 +79,54 @@ export const LawyerFormModal = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input
-              placeholder="First Name"
+              placeholder="Імʼя"
               value={profileData.firstName}
               onChange={e => onChange({ firstName: e.target.value })}
             />
             <Input
-              placeholder="Last Name"
+              placeholder="Прізвище"
               value={profileData.lastName}
               onChange={e => onChange({ lastName: e.target.value })}
             />
             <Input
-              placeholder="Middle Name"
+              placeholder="По батькові"
               value={profileData.middleName}
               onChange={e => onChange({ middleName: e.target.value })}
             />
             <Input
-              placeholder="Law Firm"
+              placeholder="Юридична фірма"
               value={profileData.lawFirm}
               onChange={e => onChange({ lawFirm: e.target.value })}
             />
           </div>
 
           <Input
-            placeholder="Specialization"
+            placeholder="Спеціалізація"
             value={profileData.specialization}
             onChange={e => onChange({ specialization: e.target.value })}
           />
 
           <Input
-            placeholder="License Number"
+            placeholder="Номер ліцензії"
             value={profileData.licenseNumber}
             onChange={e => onChange({ licenseNumber: e.target.value })}
           />
 
           <Input
             type="number"
-            placeholder="Years of Experience"
+            placeholder="Стаж роботи (у роках)"
             value={String(profileData.yearsOfExperience)}
             onChange={e => onChange({ yearsOfExperience: parseInt(e.target.value, 10) })}
           />
 
           <Textarea
-            placeholder="Bio"
+            placeholder="Біографія"
             value={profileData.bio}
             onChange={e => onChange({ bio: e.target.value })}
           />
 
           <Input
-            placeholder="Certifications (comma separated)"
+            placeholder="Сертифікати (через кому)"
             value={profileData.certifications?.join(', ') || ''}
             onChange={e =>
               onChange({ certifications: e.target.value.split(',').map(s => s.trim()) })
@@ -132,7 +134,7 @@ export const LawyerFormModal = ({
           />
 
           <Input
-            placeholder="Languages (comma separated)"
+            placeholder="Мови (через кому)"
             value={profileData.languages?.join(', ') || ''}
             onChange={e => onChange({ languages: e.target.value.split(',').map(s => s.trim()) })}
           />
@@ -140,10 +142,10 @@ export const LawyerFormModal = ({
 
         <DialogFooter className="mt-6">
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            Скасувати
           </Button>
           <Button onClick={onSubmit} disabled={isSubmitting || (!userId && isNew)}>
-            {isSubmitting ? 'Saving…' : isNew ? 'Create Profile' : 'Update Profile'}
+            {isSubmitting ? 'Збереження…' : isNew ? 'Створити профіль' : 'Оновити профіль'}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -40,10 +40,10 @@ export default function BotTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Collections</TableHead>
-            <TableHead>Last Updated</TableHead>
-            <TableHead>Bot promt</TableHead>
+            <TableHead>Назва</TableHead>
+            <TableHead>Колекції</TableHead>
+            <TableHead>Оновлено</TableHead>
+            <TableHead>Промт бота</TableHead>
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
@@ -59,7 +59,7 @@ export default function BotTable({
           ) : bots.length === 0 ? (
             <TableRow>
               <TableCell colSpan={5}>
-                <div className="text-center py-6 text-muted-foreground">No bots found</div>
+                <div className="text-center py-6 text-muted-foreground">Ботів не знайдено</div>
               </TableCell>
             </TableRow>
           ) : (
@@ -80,7 +80,7 @@ export default function BotTable({
                     </Badge>
                   </div>
                 </TableCell>
-                <TableCell>{format(bot.updatedAt, 'MMM d, yyyy')}</TableCell>
+                <TableCell>{format(bot.updatedAt, 'd MMM, yyyy')}</TableCell>
                 <TableCell>{bot.botPrompt}</TableCell>
                 <TableCell>
                   <DropdownMenu>
@@ -90,7 +90,7 @@ export default function BotTable({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuLabel>Дії</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={() => {
@@ -99,7 +99,7 @@ export default function BotTable({
                         }}
                       >
                         <Pencil className="h-4 w-4 mr-2" />
-                        Edit
+                        Редагувати
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         className="text-red-600"
@@ -109,7 +109,7 @@ export default function BotTable({
                         }}
                       >
                         <Trash2 className="h-4 w-4 mr-2" />
-                        Delete
+                        Видалити
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

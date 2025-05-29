@@ -11,11 +11,11 @@ export default function ActionButtons({ onNewCollection, onNewBot }: ActionButto
     <div className="flex items-center gap-2">
       <Button onClick={onNewCollection}>
         <FolderPlus className="h-4 w-4 mr-2" />
-        New Collection
+        Нова колекція
       </Button>
       <Button onClick={onNewBot}>
         <Plus className="h-4 w-4 mr-2" />
-        New Bot
+        Новий бот
       </Button>
     </div>
   );
