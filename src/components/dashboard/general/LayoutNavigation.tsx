@@ -1,41 +1,46 @@
 'use client';
 
 import React from 'react';
-import { Bot, BarChart3, Scale, Users, FileMinus, CreditCard } from 'lucide-react';
+import { Bot, BarChart3, Scale, Users, FileMinus, CreditCard, FileText } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/libs/utils';
 import Link from 'next/link';
 
 const navigation = [
   {
-    name: 'Users',
+    name: 'Користувачі',
     href: '/users',
     icon: Users,
   },
   {
-    name: 'Lawyers',
+    name: 'Юристи',
     href: '/lawyers',
     icon: Scale,
   },
   {
-    name: 'Bots',
+    name: 'Боти',
     href: '/bots',
     icon: Bot,
   },
   {
-    name: 'Subscription Plans',
+    name: 'Тарифи підписки',
     href: '/subscription-plans',
     icon: CreditCard,
   },
   {
-    name: 'Subscriptions',
+    name: 'Підписки',
     href: '/subscriptions',
     icon: CreditCard,
   },
   {
-    name: 'Feedback',
-    href: '/feedback',
+    name: 'Відгуки',
+    href: '/feedbacks',
     icon: BarChart3,
+  },
+  {
+    name: 'Шаблони документів',
+    href: '/templates',
+    icon: FileText,
   },
 ];
 

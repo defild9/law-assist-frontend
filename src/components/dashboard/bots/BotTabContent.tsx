@@ -28,21 +28,22 @@ export default function BotTabContent() {
 
   const { mutate: updateBot, isPending: isUpdating } = useUpdateBot({
     onSuccess: () => {
-      toast.success('Bot updated successfully');
+      toast.success('Бота успішно оновлено');
       closeEditBot();
       queryClient.invalidateQueries({ queryKey: ['bots'] });
       setSelectedBot(null);
     },
-    onError: () => toast.error('Failed to update bot'),
+    onError: () => toast.error('Не вдалося оновити бота'),
   });
+
   const { mutate: deleteBot, isPending: isDeleting } = useDeleteBot({
     onSuccess: () => {
-      toast.success('Bot deleted successfully');
+      toast.success('Бота успішно видалено');
       closeDeleteBot();
       queryClient.invalidateQueries({ queryKey: ['bots'] });
       setSelectedBot(null);
     },
-    onError: () => toast.error('Failed to delete bot'),
+    onError: () => toast.error('Не вдалося видалити бота'),
   });
 
   const { data: collections } = useVectorStoreCollections();
@@ -51,7 +52,7 @@ export default function BotTabContent() {
 
   const handleUpdateBot = () => {
     if (!selectedBot?.id || !selectedBot.name || !selectedBot.chromaCollection) {
-      toast.error('Please fill in all required fields');
+      toast.error('Будь ласка, заповніть усі обов’язкові поля');
       return;
     }
     updateBot({
@@ -67,7 +68,7 @@ export default function BotTabContent() {
 
   const handleDeleteBot = () => {
     if (!selectedBot?.id) {
-      toast.error('Please select a bot to delete');
+      toast.error('Будь ласка, виберіть бота для видалення');
       return;
     }
     deleteBot(selectedBot.id);
@@ -80,7 +81,7 @@ export default function BotTabContent() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BotIcon className="h-5 w-5" />
-              Bots
+              Боти
             </CardTitle>
           </CardHeader>
           <CardContent>

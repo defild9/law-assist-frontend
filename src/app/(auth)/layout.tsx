@@ -1,7 +1,36 @@
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
+const quotes = [
+  {
+    text: 'Життя закону полягало не в логіці, а в досвіді.',
+    author: 'Олівер Венделл Голмс-молодший',
+  },
+  {
+    text: 'Знання закону — це не просто пам’ятати його слова, а розуміти його зміст.',
+    author: 'Арістотель',
+  },
+  {
+    text: 'Закон без справедливості — це лише сила в законній оболонці.',
+    author: 'Олександр Солженіцин',
+  },
+  {
+    text: 'Право — це мистецтво добра і справедливості.',
+    author: 'Ульпіан',
+  },
+  {
+    text: 'Свобода існує лише там, де діє закон.',
+    author: 'Бенджамін Франклін',
+  },
+];
+
+function getRandomQuote() {
+  return quotes[Math.floor(Math.random() * quotes.length)];
+}
+
 export default function AuthLayout({ children }: { children: ReactNode }) {
+  const quote = getRandomQuote();
+
   return (
     <div className="min-h-screen bg-background text-foreground flex">
       <div className="hidden lg:flex flex-1 flex-col justify-between p-12 bg-black">
@@ -15,11 +44,8 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             </Link>
           </>
           <blockquote className="space-y-2">
-            {/* need to change for random */}
-            <p className="text-lg text-white">
-              &quot;The life of the law has not been logic; it has been experience.&quot;
-            </p>
-            <footer className="text-sm text-white/60">Oliver Wendell Holmes Jr</footer>
+            <p className="text-lg text-white">«{quote.text}»</p>
+            <footer className="text-sm text-white/60">{quote.author}</footer>
           </blockquote>
         </div>
       </div>

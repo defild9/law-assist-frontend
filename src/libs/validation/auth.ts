@@ -1,21 +1,21 @@
 import * as z from 'zod';
 
 export const signInSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email address' }),
-  password: z.string().min(6, { message: 'Password must be at least 6 characters' }),
+  email: z.string().email({ message: 'Введіть коректну електронну пошту' }),
+  password: z.string().min(6, { message: 'Пароль має містити щонайменше 6 символів' }),
 });
 
 export const signUpSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email address' }),
+  email: z.string().email({ message: 'Введіть коректну електронну пошту' }),
 
   password: z
     .string()
-    .min(8, { message: 'Password must be at least 8 characters' })
-    .max(100, { message: 'Password must be at most 100 characters' })
-    .regex(/[a-z]/, { message: 'Password must contain at least one lowercase letter' })
-    .regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter' })
-    .regex(/[0-9]/, { message: 'Password must contain at least one number' })
-    .regex(/[^A-Za-z0-9]/, { message: 'Password must contain at least one special character' }),
+    .min(8, { message: 'Пароль має містити щонайменше 8 символів' })
+    .max(100, { message: 'Пароль має містити не більше 100 символів' })
+    .regex(/[a-z]/, { message: 'Пароль повинен містити хоча б одну малу літеру' })
+    .regex(/[A-Z]/, { message: 'Пароль повинен містити хоча б одну велику літеру' })
+    .regex(/[0-9]/, { message: 'Пароль повинен містити хоча б одну цифру' })
+    .regex(/[^A-Za-z0-9]/, { message: 'Пароль повинен містити хоча б один спеціальний символ' }),
 });
 
 export type SignInData = z.infer<typeof signInSchema>;

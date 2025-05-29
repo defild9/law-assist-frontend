@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Dialog,
   DialogContent,
@@ -44,44 +42,44 @@ export default function AddBotModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create New Bot</DialogTitle>
+          <DialogTitle>Створити нового бота</DialogTitle>
           <DialogDescription>
-            Create a new AI assistant and assign it to collections
+            Створіть нового AI-помічника та призначте його до колекції
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div>
-            <label>Name</label>
+            <label>Назва</label>
             <Input
               value={newBot.name}
               onChange={e => setNewBot(prev => ({ ...prev, name: e.target.value }))}
-              placeholder="Enter bot name"
+              placeholder="Введіть назву бота"
             />
           </div>
           <div>
-            <label>Description</label>
+            <label>Опис</label>
             <Textarea
               value={newBot.description}
               onChange={e => setNewBot(prev => ({ ...prev, description: e.target.value }))}
-              placeholder="Enter bot description"
+              placeholder="Введіть опис бота"
             />
           </div>
           <div>
-            <label>Bot Prompt</label>
+            <label>Промт бота</label>
             <Textarea
               value={newBot.botPrompt}
               onChange={e => setNewBot(prev => ({ ...prev, botPrompt: e.target.value }))}
-              placeholder="Enter bot prompt"
+              placeholder="Введіть промт для бота"
             />
           </div>
           <div>
-            <label>Collection</label>
+            <label>Колекція</label>
             <Select
               value={newBot.collection}
               onValueChange={val => setNewBot(prev => ({ ...prev, collection: val }))}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select collection" />
+                <SelectValue placeholder="Оберіть колекцію" />
               </SelectTrigger>
               <SelectContent>
                 {collections?.collection.map(col => (
@@ -95,10 +93,10 @@ export default function AddBotModal({
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>
-            Cancel
+            Скасувати
           </Button>
           <Button onClick={onCreate}>
-            {isCreating ? <Loader2 className="animate-spin h-4 w-4" /> : 'Create Bot'}
+            {isCreating ? <Loader2 className="animate-spin h-4 w-4" /> : 'Створити бота'}
           </Button>
         </DialogFooter>
       </DialogContent>

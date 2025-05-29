@@ -9,8 +9,17 @@ import {
 } from '@/components/ui/Table';
 import { Button } from '@/components/ui/Button';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
-import { Feedback, FeedbackType } from '@/api/types/feedback';
+import { Feedback, FeedbackType, FeedbackTag } from '@/api/types/feedback';
 import { format } from 'date-fns';
+
+const FeedbackTagLabels: Record<FeedbackTag, string> = {
+  'too short': 'Занадто коротко',
+  'off-topic': 'Не по темі',
+  helpful: 'Корисно',
+  harmful: 'Шкідливо',
+  spam: 'Спам',
+  other: 'Інше',
+};
 
 interface FeedbackTableProps {
   feedbackList: Feedback[];
@@ -45,18 +54,18 @@ export const FeedbackTable: React.FC<FeedbackTableProps> = ({ feedbackList, sear
         <TableRow>
           <TableHead>
             <Button variant="ghost" onClick={() => handleSort('type')}>
-              Type
+              Тип
             </Button>
           </TableHead>
           <TableHead>
             <Button variant="ghost" onClick={() => handleSort('message')}>
-              Message
+              Повідомлення
             </Button>
           </TableHead>
-          <TableHead>Tag</TableHead>
+          <TableHead>Тег</TableHead>
           <TableHead>
             <Button variant="ghost" onClick={() => handleSort('createdAt')}>
-              Date
+              Дата
             </Button>
           </TableHead>
         </TableRow>
@@ -74,8 +83,8 @@ export const FeedbackTable: React.FC<FeedbackTableProps> = ({ feedbackList, sear
                 )}
               </TableCell>
               <TableCell className="truncate max-w-[300px]">{f.message}</TableCell>
-              <TableCell>{f.tag}</TableCell>
-              <TableCell>{format(f.createdAt, 'MMM d, yyyy HH:mm')}</TableCell>
+              <TableCell>{FeedbackTagLabels[f.tag]}</TableCell>
+              <TableCell>{format(f.createdAt, 'd MMM yyyy HH:mm')}</TableCell>
             </TableRow>
           ))}
       </TableBody>

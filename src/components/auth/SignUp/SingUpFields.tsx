@@ -11,7 +11,7 @@ export const SignUpFields: React.FC<SignUpFieldsProps> = ({ register, errors }) 
     <Input
       {...register('email')}
       type="email"
-      placeholder="name@example.com"
+      placeholder="ваш@email.com"
       hasError={!!errors.email}
     />
     {errors.email?.message && (
@@ -21,7 +21,7 @@ export const SignUpFields: React.FC<SignUpFieldsProps> = ({ register, errors }) 
     <Input
       {...register('password')}
       type="password"
-      placeholder="Enter your password"
+      placeholder="Введіть пароль"
       hasError={!!errors.password}
     />
     {errors.password?.message && (

@@ -8,8 +8,8 @@ export default function HeaderSection() {
         <Users className="h-5 w-5 text-primary" />
       </div>
       <div>
-        <h1 className="text-2xl font-bold">Users</h1>
-        <p className="text-muted-foreground">Manage user accounts and permissions</p>
+        <h1 className="text-2xl font-bold">Користувачі</h1>
+        <p className="text-muted-foreground">Керуйте обліковими записами та правами доступу</p>
       </div>
     </div>
   );

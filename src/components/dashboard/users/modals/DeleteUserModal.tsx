@@ -11,7 +11,6 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-  DialogClose,
 } from '@/components/ui/Dialog';
 
 interface DeleteUserModalProps {
@@ -32,17 +31,17 @@ export const DeleteUserModal = ({
       <DialogOverlay />
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete User</DialogTitle>
+          <DialogTitle>Видалення користувача</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete this user? This action cannot be undone.
+            Ви впевнені, що хочете видалити цього користувача? Цю дію неможливо скасувати.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" onClick={onOpenChange}>
-            Cancel
+            Скасувати
           </Button>
           <Button variant="destructive" onClick={onDelete}>
-            {isDeleting ? <Loader2 className="animate-spin h-4 w-4" /> : 'Delete User'}
+            {isDeleting ? <Loader2 className="animate-spin h-4 w-4" /> : 'Видалити користувача'}
           </Button>
         </DialogFooter>
       </DialogContent>

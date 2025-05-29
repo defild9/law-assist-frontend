@@ -8,8 +8,8 @@ export default function HeaderSection() {
         <Users className="h-5 w-5 text-primary" />
       </div>
       <div>
-        <h1 className="text-2xl font-bold">Lawyer Profiles</h1>
-        <p className="text-muted-foreground">Manage lawyer profiles and permissions</p>
+        <h1 className="text-2xl font-bold">Профілі юристів</h1>
+        <p className="text-muted-foreground">Керуйте профілями юристів і правами доступу</p>
       </div>
     </div>
   );

@@ -11,18 +11,19 @@ export default function VideoConsultationNotFound() {
             <VideoOff className="w-8 h-8 text-muted-foreground" />
           </div>
 
-          <h1 className="text-2xl font-semibold tracking-tight">Consultation Room Not Found</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">
+            Кімнату консультації не знайдено
+          </h1>
 
           <p className="text-muted-foreground">
-            The consultation room you&apos;re looking for doesn&apos;t exist or has been closed.
-            This could be because:
+            Кімната консультації, яку ви шукаєте, не існує або була закрита. Це може бути через:
           </p>
 
           <ul className="text-sm text-muted-foreground space-y-2 mt-4">
-            <li>• The room ID is incorrect</li>
-            <li>• The consultation has ended</li>
-            <li>• The room has been deleted</li>
-            <li>• You don&apos;t have permission to access this room</li>
+            <li>• Невірний ідентифікатор кімнати</li>
+            <li>• Консультацію завершено</li>
+            <li>• Кімнату видалено</li>
+            <li>• У вас немає доступу до цієї кімнати</li>
           </ul>
         </div>
 
@@ -33,30 +34,30 @@ export default function VideoConsultationNotFound() {
               className="w-full flex items-center justify-center gap-2"
             >
               <Calendar className="h-4 w-4" />
-              Book a Consultation
+              Записатись на консультацію
             </Link>
           </Button>
 
           <Button variant="outline" className="w-full ">
             <Link href="/profile" className="w-full flex items-center justify-center gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Return to Profile
+              Повернутися до профілю
             </Link>
           </Button>
 
           <Button variant="ghost" className="w-full ">
             <Link href="/support" className="w-full flex items-center justify-center gap-2">
               <HelpCircle className="h-4 w-4" />
-              Get Help
+              Отримати допомогу
             </Link>
           </Button>
         </div>
 
         <div className="pt-4 border-t text-sm text-muted-foreground">
           <p>
-            If you believe this is an error or need assistance,{' '}
+            Якщо ви вважаєте, що сталася помилка, або вам потрібна допомога,{' '}
             <Link href="/support" className="underline underline-offset-4 hover:text-primary">
-              contact our support team
+              зверніться до нашої служби підтримки
             </Link>
           </p>
         </div>

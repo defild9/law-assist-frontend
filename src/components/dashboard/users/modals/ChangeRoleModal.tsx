@@ -36,18 +36,18 @@ export const ChangeRoleModal = ({
       <DialogOverlay />
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Change User Role</DialogTitle>
+          <DialogTitle>Зміна ролі користувача</DialogTitle>
           <DialogDescription>
-            Are you sure you want to change the role of {userEmail} to {newRole}? This will affect
-            the user’s permissions and access levels.
+            Ви впевнені, що хочете змінити роль користувача {userEmail} на {newRole}? Це вплине на
+            його права доступу та дозволи в системі.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            Скасувати
           </Button>
           <Button onClick={onConfirm} disabled={isChanging}>
-            {isChanging ? <Loader2 className="animate-spin h-4 w-4" /> : 'Change Role'}
+            {isChanging ? <Loader2 className="animate-spin h-4 w-4" /> : 'Змінити роль'}
           </Button>
         </DialogFooter>
       </DialogContent>

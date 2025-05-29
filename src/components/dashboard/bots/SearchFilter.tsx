@@ -28,7 +28,7 @@ export default function SearchFilter({
       <div className="relative flex-1">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
-          placeholder="Search bots..."
+          placeholder="Пошук ботів..."
           value={searchBot}
           onChange={e => setSearchBot(e.target.value)}
           className="pl-10"
@@ -36,10 +36,10 @@ export default function SearchFilter({
       </div>
       <Select value={selectedCollection} onValueChange={setSelectedCollection}>
         <SelectTrigger className="w-[200px]">
-          <SelectValue placeholder="Filter by collection" />
+          <SelectValue placeholder="Фільтр за колекцією" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Collections</SelectItem>
+          <SelectItem value="all">Усі колекції</SelectItem>
           {collections?.collection?.map(col => (
             <SelectItem key={col} value={col}>
               {col}

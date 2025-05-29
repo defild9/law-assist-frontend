@@ -243,21 +243,21 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
       <Dialog open={showOtherDialog} onOpenChange={setShowOtherDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Other Feedback</DialogTitle>
-            <DialogDescription>Tell us more...</DialogDescription>
+            <DialogTitle>Інший відгук</DialogTitle>
+            <DialogDescription>Розкажіть нам більше...</DialogDescription>
           </DialogHeader>
           <Textarea
             value={otherFeedback}
             onChange={e => setOtherFeedback(e.target.value)}
-            placeholder="Your comment"
+            placeholder="Ваш коментар"
             className="w-full min-h-[100px]"
           />
           <DialogFooter className="flex justify-end gap-2">
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline">Скасувати</Button>
             </DialogClose>
             <Button onClick={handleOtherSubmit} disabled={!otherFeedback.trim()}>
-              Submit
+              Надіслати
             </Button>
           </DialogFooter>
         </DialogContent>

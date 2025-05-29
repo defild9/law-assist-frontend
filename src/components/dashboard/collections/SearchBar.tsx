@@ -24,7 +24,7 @@ interface SearchBarProps {
 
 export function SearchBar({
   value,
-  placeholder = 'Search...',
+  placeholder = 'Пошук...',
   onChange,
   setItemsPerPage,
   setCurrentPage,
@@ -51,13 +51,13 @@ export function SearchBar({
         }}
       >
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Items per page" />
+          <SelectValue placeholder="Кількість на сторінку" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="5">5 per page</SelectItem>
-          <SelectItem value="10">10 per page</SelectItem>
-          <SelectItem value="15">15 per page</SelectItem>
-          <SelectItem value="20">20 per page</SelectItem>
+          <SelectItem value="5">5 на сторінку</SelectItem>
+          <SelectItem value="10">10 на сторінку</SelectItem>
+          <SelectItem value="15">15 на сторінку</SelectItem>
+          <SelectItem value="20">20 на сторінку</SelectItem>
         </SelectContent>
       </Select>
       {isNeedRefresh && (

@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Dialog,
   DialogContent,
@@ -28,17 +26,17 @@ export default function DeleteBotModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Bot</DialogTitle>
+          <DialogTitle>Видалити бота</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete this bot? This action cannot be undone.
+            Ви впевнені, що хочете видалити цього бота? Цю дію не можна буде скасувати.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>
-            Cancel
+            Скасувати
           </Button>
           <Button variant="destructive" onClick={onDelete}>
-            {isDeleting ? <Loader2 className="animate-spin h-4 w-4" /> : 'Delete Bot'}
+            {isDeleting ? <Loader2 className="animate-spin h-4 w-4" /> : 'Видалити бота'}
           </Button>
         </DialogFooter>
       </DialogContent>

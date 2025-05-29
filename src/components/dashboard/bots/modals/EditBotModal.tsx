@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Dialog,
   DialogContent,
@@ -53,12 +51,12 @@ export default function EditBotModal({
     >
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit Bot</DialogTitle>
-          <DialogDescription>Update the bot’s information and settings</DialogDescription>
+          <DialogTitle>Редагувати бота</DialogTitle>
+          <DialogDescription>Оновіть інформацію та налаштування бота</DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div>
-            <label>Name</label>
+            <label>Назва</label>
             <Input
               value={selectedBot.name}
               onChange={e =>
@@ -67,7 +65,7 @@ export default function EditBotModal({
             />
           </div>
           <div>
-            <label>Description</label>
+            <label>Опис</label>
             <Textarea
               value={selectedBot.description || ''}
               onChange={e =>
@@ -76,7 +74,7 @@ export default function EditBotModal({
             />
           </div>
           <div>
-            <label>Bot Prompt</label>
+            <label>Промт бота</label>
             <Textarea
               value={selectedBot.botPrompt}
               onChange={e =>
@@ -85,7 +83,7 @@ export default function EditBotModal({
             />
           </div>
           <div>
-            <label>Collection</label>
+            <label>Колекція</label>
             <Select
               value={selectedBot.chromaCollection}
               onValueChange={val =>
@@ -93,7 +91,7 @@ export default function EditBotModal({
               }
             >
               <SelectTrigger>
-                <SelectValue />
+                <SelectValue placeholder="Оберіть колекцію" />
               </SelectTrigger>
               <SelectContent>
                 {collections?.collection.map(col => (
@@ -113,10 +111,10 @@ export default function EditBotModal({
               onClose();
             }}
           >
-            Cancel
+            Скасувати
           </Button>
           <Button onClick={onUpdate}>
-            {isUpdating ? <Loader2 className="animate-spin h-4 w-4" /> : 'Update Bot'}
+            {isUpdating ? <Loader2 className="animate-spin h-4 w-4" /> : 'Оновити бота'}
           </Button>
         </DialogFooter>
       </DialogContent>

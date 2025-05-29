@@ -51,10 +51,10 @@ export default function DocumentTemplates() {
   const deleteTemplate = useDeleteDocumentTemplate({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['templates'] });
-      toast.success('Template deleted');
+      toast.success('Шаблон видалено');
     },
     onError: () => {
-      toast.error('Failed to delete template');
+      toast.error('Не вдалося видалити шаблон');
     },
   });
 
@@ -84,13 +84,13 @@ export default function DocumentTemplates() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
             <Scale className="h-8 w-8 text-primary" />
-            <h1 className="text-2xl font-bold">Document Templates</h1>
+            <h1 className="text-2xl font-bold">Шаблони документів</h1>
           </div>
           <div className="flex items-center gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search templates..."
+                placeholder="Пошук шаблонів..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 className="pl-10 w-[300px]"
@@ -101,7 +101,7 @@ export default function DocumentTemplates() {
                 router.push('/templates/add');
               }}
             >
-              <Plus className="mr-2 h-4 w-4" /> Add Template
+              <Plus className="mr-2 h-4 w-4" /> Додати шаблон
             </Button>
           </div>
         </div>
@@ -110,33 +110,33 @@ export default function DocumentTemplates() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Title</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Updated at</TableHead>
-                <TableHead>Created at</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+                <TableHead>Назва</TableHead>
+                <TableHead>Опис</TableHead>
+                <TableHead>Категорія</TableHead>
+                <TableHead>Оновлено</TableHead>
+                <TableHead>Створено</TableHead>
+                <TableHead className="text-right">Дії</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {isLoading && (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-4">
-                    Loading…
+                    Завантаження…
                   </TableCell>
                 </TableRow>
               )}
               {error && (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-4 text-red-500">
-                    Error loading templates
+                    Помилка завантаження шаблонів
                   </TableCell>
                 </TableRow>
               )}
               {!isLoading && templates.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-4">
-                    No templates found
+                    Шаблонів не знайдено
                   </TableCell>
                 </TableRow>
               )}
@@ -159,7 +159,7 @@ export default function DocumentTemplates() {
                           variant="outline"
                           onClick={() => openPreview(tpl.title, tpl.content)}
                         >
-                          View
+                          Переглянути
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="w-[90vw] max-w-5xl">
@@ -171,7 +171,7 @@ export default function DocumentTemplates() {
                         </div>
                         <DialogFooter>
                           <DialogClose asChild>
-                            <Button>Close</Button>
+                            <Button>Закрити</Button>
                           </DialogClose>
                         </DialogFooter>
                       </DialogContent>
@@ -183,26 +183,26 @@ export default function DocumentTemplates() {
                         router.push(`/templates/update/${tpl.id}`);
                       }}
                     >
-                      Edit
+                      Редагувати
                     </Button>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button size="sm" variant="destructive">
-                          Delete
+                          Видалити
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>Delete Template</AlertDialogTitle>
+                          <AlertDialogTitle>Видалити шаблон</AlertDialogTitle>
                           <AlertDialogDescription>
-                            Are you sure you want to delete &quot;{tpl.title} &quot;? This action
-                            cannot be undone.
+                            Ви впевнені, що хочете видалити &quot;{tpl.title}&quot;? Цю дію не можна
+                            буде скасувати.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogCancel>Скасувати</AlertDialogCancel>
                           <AlertDialogAction onClick={() => deleteTemplate.mutate(tpl.id)}>
-                            Delete
+                            Видалити
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
@@ -216,28 +216,28 @@ export default function DocumentTemplates() {
 
         <div className="flex items-center justify-between mt-4">
           <p className="text-sm text-muted-foreground">
-            Page {page} of {totalPages}
+            Сторінка {page} з {totalPages}
           </p>
           <div className="space-x-2">
             <Button size="sm" onClick={() => setPage(1)} disabled={page === 1}>
-              First
+              Перша
             </Button>
             <Button
               size="sm"
               onClick={() => setPage(p => Math.max(1, p - 1))}
               disabled={page === 1}
             >
-              Prev
+              Назад
             </Button>
             <Button
               size="sm"
               onClick={() => setPage(p => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
             >
-              Next
+              Далі
             </Button>
             <Button size="sm" onClick={() => setPage(totalPages)} disabled={page === totalPages}>
-              Last
+              Остання
             </Button>
           </div>
         </div>

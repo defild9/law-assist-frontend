@@ -30,15 +30,15 @@ export function SignInForm() {
   const onSubmit = async (data: SignInData) => {
     setServerError(null);
     const res = await signIn('credentials', { redirect: false, ...data });
-    if (res?.error) setServerError('Something went wrong! Please try again later.');
+    if (res?.error) setServerError('Щось пішло не так! Спробуйте пізніше.');
     else router.push('/chat');
   };
 
   return (
     <AuthFormLayout>
       <AuthHeader
-        title="Welcome back"
-        subtitle="Enter your email to sign in to your account"
+        title="З поверненням"
+        subtitle="Введіть свою електронну пошту, щоб увійти до акаунта"
         hideOnDesktop
       />
 
@@ -52,12 +52,16 @@ export function SignInForm() {
           className="w-full bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Signing in...' : 'Sign in'}
+          {isSubmitting ? 'Вхід...' : 'Увійти'}
         </Button>
 
         <Divider />
 
-        <AuthFooter question="Don’t have an account?" actionText="Sign up" actionHref="/sign-up" />
+        <AuthFooter
+          question="Ще не маєте акаунта?"
+          actionText="Зареєструватися"
+          actionHref="/sign-up"
+        />
       </form>
     </AuthFormLayout>
   );

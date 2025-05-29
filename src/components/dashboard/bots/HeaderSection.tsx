@@ -8,8 +8,8 @@ export default function HeaderSection() {
           <BotIcon className="h-5 w-5 text-primary" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold">AI Bots</h1>
-          <p className="text-muted-foreground">Manage AI assistants and their knowledge bases</p>
+          <h1 className="text-2xl font-bold">AI-боти</h1>
+          <p className="text-muted-foreground">Керуйте AI-помічниками та їх базами знань</p>
         </div>
       </div>
     </div>

@@ -39,10 +39,10 @@ export default function BotsAndCollectionsContent() {
       });
       closeAddBot();
       queryClient.invalidateQueries({ queryKey: ['bots'] });
-      toast.success('Bot created successfully');
+      toast.success('Бота успішно створено');
     },
     onError: () => {
-      toast.error('Failed to create bot');
+      toast.error('Не вдалося створити бота');
     },
   });
 
@@ -51,10 +51,10 @@ export default function BotsAndCollectionsContent() {
       setNewCollectionName('');
       closeAddCollection();
       queryClient.invalidateQueries({ queryKey: ['vectorStoreCollectionsWithFiles'] });
-      toast.success('Collection created successfully');
+      toast.success('Колекцію успішно створено');
     },
     onError: () => {
-      toast.error('Failed to create collection');
+      toast.error('Не вдалося створити колекцію');
     },
   });
 
@@ -68,7 +68,7 @@ export default function BotsAndCollectionsContent() {
 
   const handleCreateBot = () => {
     if (!newBot.name || newBot.collection === '') {
-      toast.error('Please fill in all required fields');
+      toast.error('Будь ласка, заповніть усі обов’язкові поля');
       return;
     }
     createBot({
@@ -81,11 +81,12 @@ export default function BotsAndCollectionsContent() {
 
   const handleCreateCollection = () => {
     if (!newCollectionName) {
-      toast.error('Please fill in all required fields');
+      toast.error('Будь ласка, заповніть усі обов’язкові поля');
       return;
     }
     createCollection(newCollectionName);
   };
+
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -95,11 +96,11 @@ export default function BotsAndCollectionsContent() {
           <div className="flex items-center gap-2">
             <Button onClick={() => openAddCollection()}>
               <FolderPlus className="h-4 w-4 mr-2" />
-              New Collection
+              Нова колекція
             </Button>
             <Button onClick={() => openAddBot()}>
               <Plus className="h-4 w-4 mr-2" />
-              New Bot
+              Новий бот
             </Button>
           </div>
         </div>
@@ -108,11 +109,11 @@ export default function BotsAndCollectionsContent() {
           <TabsList>
             <TabsTrigger value="bots" className="flex items-center gap-2">
               <BotIcon className="h-4 w-4" />
-              Bots
+              Боти
             </TabsTrigger>
             <TabsTrigger value="collections" className="flex items-center gap-2">
               <Database className="h-4 w-4" />
-              Collections
+              Колекції
             </TabsTrigger>
           </TabsList>
 
@@ -124,6 +125,7 @@ export default function BotsAndCollectionsContent() {
           </TabsContent>
         </Tabs>
       </div>
+
       <AddBotModal
         isOpen={isVisibleAddBot}
         onClose={closeAddBot}

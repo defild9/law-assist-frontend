@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
-import { Scale, CalendarIcon, Clock, User, Briefcase, Star } from 'lucide-react';
+import { Scale, CalendarIcon, Clock, User, Briefcase } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Avatar, AvatarFallback } from '@/components/ui/Avatar';
 import { Calendar } from '@/components/ui/Calendat';
@@ -62,7 +62,7 @@ export default function BookConsultationPage() {
     e.preventDefault();
 
     if (!selectedLawyer || !selectedDate || !selectedTime) {
-      toast.error('Please select lawyer, date, and time');
+      toast.error('Будь ласка, виберіть юриста, дату та час');
       return;
     }
 
@@ -78,11 +78,11 @@ export default function BookConsultationPage() {
       },
       {
         onSuccess: () => {
-          toast.success('Consultation booked');
+          toast.success('Консультацію заброньовано');
           queryClient.invalidateQueries({ queryKey: ['lawyersAvailability'] });
           router.push('/profile');
         },
-        onError: () => toast.error('Booking failed'),
+        onError: () => toast.error('Не вдалося створити запис'),
       }
     );
   };
@@ -95,20 +95,18 @@ export default function BookConsultationPage() {
             <Scale className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Book a Legal Consultation</h1>
-            <p className="text-muted-foreground">
-              Schedule a video consultation with our expert lawyers
-            </p>
+            <h1 className="text-2xl font-bold">Запис на юридичну консультацію</h1>
+            <p className="text-muted-foreground">Оберіть дату та час відеоконсультації з юристом</p>
           </div>
         </div>
 
         <Card>
           <CardContent className="pt-6">
             <h2 className="text-lg font-semibold flex items-center gap-2">
-              <Briefcase className="h-5 w-5" /> Select a Lawyer
+              <Briefcase className="h-5 w-5" /> Виберіть юриста
             </h2>
             {loadingLawyers ? (
-              <p>Loading...</p>
+              <p>Завантаження...</p>
             ) : (
               <div className="grid md:grid-cols-2 gap-4 mt-4">
                 {availabilityData?.data.map(a => (
@@ -149,7 +147,7 @@ export default function BookConsultationPage() {
           <Card>
             <CardContent className="pt-6">
               <h2 className="text-lg font-semibold flex items-center gap-2">
-                <CalendarIcon className="h-5 w-5" /> Select Date & Time
+                <CalendarIcon className="h-5 w-5" /> Виберіть дату та час
               </h2>
               <div className="grid md:grid-cols-2 gap-6 mt-4">
                 <Calendar
@@ -163,7 +161,7 @@ export default function BookConsultationPage() {
                   <div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock className="h-4 w-4" />
-                      <span>Available time slots</span>
+                      <span>Доступний час</span>
                     </div>
                     <Select
                       value={selectedTime}
@@ -171,7 +169,7 @@ export default function BookConsultationPage() {
                       disabled={!selectedDate}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Select time" />
+                        <SelectValue placeholder="Оберіть час" />
                       </SelectTrigger>
                       <SelectContent>
                         {selectedDate &&
@@ -184,11 +182,11 @@ export default function BookConsultationPage() {
                     </Select>
                   </div>
                   <div>
-                    <label className="text-sm font-medium">Notes</label>
+                    <label className="text-sm font-medium">Додаткові деталі</label>
                     <Textarea
                       value={notes}
                       onChange={e => setNotes(e.target.value)}
-                      placeholder="Any details about your case..."
+                      placeholder="Опишіть суть вашого запиту..."
                       className="mt-1 min-h-[100px]"
                     />
                   </div>
@@ -201,28 +199,28 @@ export default function BookConsultationPage() {
         {selectedLawyer && selectedDate && selectedTime && (
           <Card>
             <CardContent className="pt-6">
-              <h2 className="text-lg font-semibold">Booking Summary</h2>
+              <h2 className="text-lg font-semibold">Підсумок бронювання</h2>
               <div className="space-y-4 mt-4">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground flex items-center gap-2">
-                    <User className="h-4 w-4" /> Lawyer
+                    <User className="h-4 w-4" /> Юрист
                   </span>
                   <span>{selectedLawyer.lawyer.email}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground flex items-center gap-2">
-                    <CalendarIcon className="h-4 w-4" /> Date
+                    <CalendarIcon className="h-4 w-4" /> Дата
                   </span>
-                  <span>{format(selectedDate, 'MMMM d, yyyy')}</span>
+                  <span>{format(selectedDate, 'd MMMM yyyy')}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground flex items-center gap-2">
-                    <Clock className="h-4 w-4" /> Time
+                    <Clock className="h-4 w-4" /> Час
                   </span>
                   <span>{selectedTime}</span>
                 </div>
                 <Button type="submit" className="w-full">
-                  Confirm Booking
+                  Підтвердити запис
                 </Button>
               </div>
             </CardContent>

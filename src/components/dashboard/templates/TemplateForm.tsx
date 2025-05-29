@@ -36,7 +36,7 @@ export default function TemplateForm({
     title: '',
     description: '',
     category: '',
-    content: '# New Template\n\nStart writing your template here...',
+    content: '# Новий шаблон\n\nПочніть писати свій шаблон тут...',
     files: [],
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -56,9 +56,9 @@ export default function TemplateForm({
   const convertFile = useConvertFileToMarkdown({
     onSuccess: md => {
       setForm(prev => ({ ...prev, content: md }));
-      toast.success('File converted to Markdown');
+      toast.success('Файл перетворено в Markdown');
     },
-    onError: () => toast.error('Failed to convert file'),
+    onError: () => toast.error('Не вдалося перетворити файл'),
   });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +79,7 @@ export default function TemplateForm({
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.title.trim() || !form.category || !form.content.trim()) {
-      toast.error('Please fill in all required fields');
+      toast.error('Будь ласка, заповніть усі обовʼязкові поля');
       return;
     }
     onSubmit({
@@ -94,38 +94,38 @@ export default function TemplateForm({
     <form onSubmit={submit} className="space-y-8">
       <div className="grid gap-6">
         <div className="grid gap-2">
-          <Label htmlFor="title">Title</Label>
+          <Label htmlFor="title">Назва</Label>
           <Input
             id="title"
             value={form.title}
             onChange={e => setForm(prev => ({ ...prev, title: e.target.value }))}
-            placeholder="Enter template title"
+            placeholder="Введіть назву шаблону"
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="description">Description</Label>
+          <Label htmlFor="description">Опис</Label>
           <Textarea
             id="description"
             value={form.description}
             onChange={e => setForm(prev => ({ ...prev, description: e.target.value }))}
-            placeholder="Enter template description"
+            placeholder="Введіть опис шаблону"
             className="min-h-[100px]"
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="category">Category</Label>
+          <Label htmlFor="category">Категорія</Label>
           <Input
             id="category"
             value={form.category}
             onChange={e => setForm(prev => ({ ...prev, category: e.target.value }))}
-            placeholder="Enter template category"
+            placeholder="Введіть категорію шаблону"
           />
         </div>
 
         <div className="grid gap-2">
-          <Label>Attachments</Label>
+          <Label>Додані файли</Label>
           <div className="border rounded-lg p-4 space-y-4">
             <div className="flex flex-wrap gap-2">
               {form.files?.map((file, idx) => (
@@ -164,21 +164,21 @@ export default function TemplateForm({
                 ) : (
                   <Upload className="h-4 w-4 mr-2" />
                 )}
-                Upload & Convert
+                Завантажити та конвертувати
               </Button>
             </div>
           </div>
         </div>
 
         <div className="grid gap-2">
-          <Label>Template Content</Label>
+          <Label>Вміст шаблону</Label>
           <div className="border rounded-lg overflow-hidden">
             <MdEditor
               modelValue={form.content}
               onChange={val => setForm(prev => ({ ...prev, content: val }))}
               theme="light"
               previewTheme="github"
-              language="en-US"
+              language="uk-UA"
             />
           </div>
         </div>

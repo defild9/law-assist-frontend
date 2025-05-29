@@ -22,7 +22,7 @@ export function PaginationFooter({
   return (
     <div className="flex items-center justify-between pt-4">
       <div className="text-sm text-muted-foreground">
-        Showing {startIndex + 1} to {Math.min(endIndex, totalItems)} of {totalItems} collections
+        Показано з {startIndex + 1} по {Math.min(endIndex, totalItems)} із {totalItems} колекцій
       </div>
       <div className="flex items-center gap-2">
         <Button variant="outline" size="icon" onClick={() => goToPage(1)} disabled={page === 1}>
@@ -37,9 +37,9 @@ export function PaginationFooter({
           <ChevronLeft className="h-4 w-4" />
         </Button>
         <span className="flex items-center gap-1">
-          <div className="text-sm font-medium">Page</div>
+          <div className="text-sm font-medium">Сторінка</div>
           <div className="text-sm font-medium">
-            {page} of {totalPages}
+            {page} з {totalPages}
           </div>
         </span>
         <Button
