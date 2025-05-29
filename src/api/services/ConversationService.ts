@@ -16,4 +16,15 @@ export class ConversationService {
     const response = await axiosInstance.delete(`/conversation/${id}`);
     return response.data;
   }
+
+  public static async searchConversations(
+    query: string,
+    page: number = 1,
+    limit: number = 10
+  ): Promise<Conversations> {
+    const response = await axiosInstance.get<Conversations>('/conversation/search', {
+      params: { query, page, limit },
+    });
+    return response.data;
+  }
 }
