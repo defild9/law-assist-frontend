@@ -10,6 +10,7 @@ import {
   PanelRightIcon,
   Search,
   Settings,
+  Sparkles,
   User,
 } from 'lucide-react';
 import ChatSidebar from './ChatSidebar';
@@ -25,11 +26,21 @@ import {
   DropdownMenuTrigger,
 } from '../ui/DropdownMenu';
 import Link from 'next/link';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/Select';
 import { SearchConversationsDialog } from './SearchConversationsDialog';
+import { useModel } from '@/contexts/ModelContext';
+import { useBots } from '@/hooks/useBots';
+
+const DEFAULT_SENTINEL = 'default';
 
 export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const { data } = useBots();
+  const botsList = data?.bots ?? [];
+
+  const { model: selectedBotName, setModel: setSelectedBotName } = useModel();
 
   const handleLogout = () => signOut();
 
@@ -49,6 +60,35 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
                 <PanelRightIcon className="h-5 w-5" />
               )}
             </Button>
+            <Select
+              value={selectedBotName ?? DEFAULT_SENTINEL}
+              onValueChange={value =>
+                setSelectedBotName(value === DEFAULT_SENTINEL ? undefined : value)
+              }
+            >
+              <SelectTrigger className="w-[200px]">
+                <SelectValue>{selectedBotName ?? 'Default Model'}</SelectValue>
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem key="default" value={DEFAULT_SENTINEL}>
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="h-4 w-4 text-primary" />
+                    Default Model
+                  </div>
+                </SelectItem>
+
+                {botsList.map(bot => (
+                  <SelectItem key={bot.id} value={bot.name}>
+                    <div className="flex items-center gap-2" title={bot.description}>
+                      <Sparkles className="h-4 w-4 text-primary" />
+                      {bot.name}
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
             <Button variant="ghost" size="icon" onClick={() => setIsSearchOpen(true)}>
               <Search className="h-4 w-4" />
             </Button>
