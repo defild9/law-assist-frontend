@@ -4,6 +4,7 @@ import { useState } from 'react';
 import SidebarWrapper from '../ui/SidebarWrapper';
 import { Button } from '../ui/Button';
 import {
+  LayoutDashboard,
   LogOut,
   MessageSquare,
   PanelLeftIcon,
@@ -30,6 +31,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { SearchConversationsDialog } from './SearchConversationsDialog';
 import { useModel } from '@/contexts/ModelContext';
 import { useBots } from '@/hooks/useBots';
+import { useUserRole } from '@/hooks/useUserRole';
 
 const DEFAULT_SENTINEL = 'default';
 
@@ -41,6 +43,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const botsList = data?.bots ?? [];
 
   const { model: selectedBotName, setModel: setSelectedBotName } = useModel();
+  const { isAdmin, isLawyer } = useUserRole();
 
   const handleLogout = () => signOut();
 
@@ -114,6 +117,18 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
                   </DropdownMenuItem>
                 </Link>
                 <DropdownMenuSeparator />
+                {isAdmin || isLawyer ? (
+                  <>
+                    <Link href="/dashboard">
+                      <DropdownMenuItem>
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        <span>Панель керування</span>
+                      </DropdownMenuItem>
+                    </Link>
+                    <DropdownMenuSeparator />
+                  </>
+                ) : null}
+
                 <DropdownMenuItem onClick={handleLogout}>
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Вийти</span>

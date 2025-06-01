@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import { Scale } from 'lucide-react';
 
 import LayoutNavigation from '@/components/dashboard/general/LayoutNavigation';
+import Link from 'next/link';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient();
@@ -19,7 +20,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
               <Scale className="h-5 w-5 text-primary" />
             </div>
-            <span className="font-semibold">Law Assist</span>
+            <Link href="/chat">
+              <span className="font-semibold">Law Assist</span>
+            </Link>
           </div>
 
           <LayoutNavigation />
