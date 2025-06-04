@@ -15,7 +15,7 @@ export function FileItem({ source, lastUpdated, onDelete, isLoading }: FileItemP
       <div className="flex items-center gap-2">
         <FileText className="h-4 w-4 text-muted-foreground" />
         <div>
-          <p className="text-sm font-medium">{source}</p>
+          <p className="text-sm font-medium">{decodeURIComponent(escape(source))}</p>
           <p className="text-xs text-muted-foreground">
             Оновлено: {format(new Date(lastUpdated), 'd MMM yyyy')}
           </p>

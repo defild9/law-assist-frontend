@@ -18,6 +18,8 @@ import {
 } from '../ui/Dialog';
 import { Textarea } from '../ui/TextArea';
 import { ChatMessage } from '@/api/types/conversation';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface MessageItemProps {
   message: ChatMessage;
@@ -42,6 +44,8 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
   const [showOtherDialog, setShowOtherDialog] = useState(false);
   const [otherFeedback, setOtherFeedback] = useState('');
   const [showImageDialog, setShowImageDialog] = useState<string | null>(null);
+
+  const markdownRegex = /[#*_`>-]/;
 
   const createFeedback = useCreateFeedback({
     onSuccess: data => {
@@ -124,6 +128,57 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
     }
   };
 
+  const handleDownloadDocx = async () => {
+    const [{ default: MarkdownIt }, { default: htmlDocx }] = await Promise.all([
+      import('markdown-it'),
+      import('html-docx-js/dist/html-docx'),
+    ]);
+    const md = new MarkdownIt();
+    const html = `<html><head><meta charset="utf-8"></head><body>${md.render(
+      message.content
+    )}</body></html>`;
+    const blob = htmlDocx.asBlob(html);
+    const url = URL.createObjectURL(blob);
+    handleDownload(url, `message-${message.id}.docx`);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDownloadPdf = async () => {
+    try {
+      const response = await fetch('/api/pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content: message.content, // Markdown-текст повідомлення
+          messageId: message.id, // Щоб в кінці ім’я файлу було унікальним
+        }),
+      });
+
+      if (!response.ok) {
+        toast.error('Помилка при генерації PDF');
+        return;
+      }
+
+      // Отримуємо Blob із PDF
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+
+      // Створюємо прихований <a> для завантаження
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `message-${message.id}.pdf`;
+      a.click();
+
+      // Чистимо URL
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error(err);
+      toast.error('Не вдалося згенерувати PDF');
+    }
+  };
+
   return (
     <div className={cn('group flex flex-col gap-2', isUser && 'items-end')}>
       {/* bubble */}
@@ -148,8 +203,13 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
               : 'bg-muted rounded-tl-none'
           )}
         >
-          <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-
+          {markdownRegex.test(message.content) ? (
+            <div className="prose prose-sm">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+            </div>
+          ) : (
+            <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+          )}
           {message.files && message.files.length > 0 && (
             <div className="mt-2 space-y-2">
               {message.files.map((file, index) =>
@@ -180,7 +240,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
                   >
                     <FileText className="h-4 w-4 text-muted-foreground" />
                     <span className="text-sm font-medium flex-1 truncate">
-                      {file.file.filename}
+                      {decodeURIComponent(escape(file.file.filename))}
                     </span>
                     <Button
                       variant="ghost"
@@ -224,6 +284,16 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
               onClick={handleDislike}
             >
               <ThumbsDown className="h-3 w-3" />
+            </Button>
+          </>
+        )}
+        {markdownRegex.test(message.content) && (
+          <>
+            <Button variant="ghost" size="icon" onClick={handleDownloadDocx}>
+              <FileText className="h-3 w-3" />
+            </Button>
+            <Button variant="ghost" size="icon" onClick={handleDownloadPdf}>
+              <Download className="h-3 w-3" />
             </Button>
           </>
         )}
