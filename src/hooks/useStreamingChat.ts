@@ -113,7 +113,7 @@ export function useStreamingChat(initialChatId?: string, initialMessages: ChatMe
             const parsed = JSON.parse(json);
             if (parsed.chatId) setChatId(parsed.chatId);
 
-            if (parsed.content?.trim()) {
+            if (parsed.content) {
               setMessages(prev => {
                 const msgs = [...prev];
                 const existing = msgs[assistantIndex].content;

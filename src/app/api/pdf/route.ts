@@ -70,13 +70,17 @@ export async function POST(request: NextRequest) {
       </html>
     `;
 
-    const { default: puppeteer } = await import('puppeteer');
+    const { default: puppeteer } = await import('puppeteer-core');
+
+    const chromePath = '/vercel/.cache/puppeteer/chrome/linux-137.0.7151.55/chrome-linux64/chrome';
 
     const browser = await puppeteer.launch({
+      headless: true,
+      executablePath: chromePath,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
-    const page = await browser.newPage();
 
+    const page = await browser.newPage();
     await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
 
     const pdfBuffer = await page.pdf({

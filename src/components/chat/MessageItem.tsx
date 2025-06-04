@@ -151,8 +151,8 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          content: message.content, // Markdown-текст повідомлення
-          messageId: message.id, // Щоб в кінці ім’я файлу було унікальним
+          content: message.content,
+          messageId: message.id,
         }),
       });
 
@@ -161,17 +161,14 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
         return;
       }
 
-      // Отримуємо Blob із PDF
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
 
-      // Створюємо прихований <a> для завантаження
       const a = document.createElement('a');
       a.href = url;
       a.download = `message-${message.id}.pdf`;
       a.click();
 
-      // Чистимо URL
       URL.revokeObjectURL(url);
     } catch (err) {
       console.error(err);
@@ -285,16 +282,16 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
             >
               <ThumbsDown className="h-3 w-3" />
             </Button>
-          </>
-        )}
-        {markdownRegex.test(message.content) && (
-          <>
-            <Button variant="ghost" size="icon" onClick={handleDownloadDocx}>
-              <FileText className="h-3 w-3" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={handleDownloadPdf}>
-              <Download className="h-3 w-3" />
-            </Button>
+            {markdownRegex.test(message.content) && (
+              <>
+                <Button variant="ghost" size="icon" onClick={handleDownloadDocx}>
+                  <FileText className="h-3 w-3" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={handleDownloadPdf}>
+                  <Download className="h-3 w-3" />
+                </Button>
+              </>
+            )}
           </>
         )}
       </div>

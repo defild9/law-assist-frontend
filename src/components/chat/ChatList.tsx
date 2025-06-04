@@ -78,7 +78,7 @@ export function ChatList({ activeChat }: ChatListProps) {
           <Link
             href={`/chat/${conversation.id}`}
             prefetch={true}
-            className="flex items-center gap-3 text-left flex-1"
+            className="flex items-center gap-3 text-left flex-1 min-w-0"
           >
             <MessageSquare className="h-5 w-5 shrink-0" />
             <div className="min-w-0">
