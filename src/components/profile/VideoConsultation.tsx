@@ -15,11 +15,13 @@ import { Button } from '../ui/Button';
 import { format } from 'date-fns';
 import { ConsultationStatus } from '@/api/types/video-consultation';
 import EditConsultationModal from './EditConsultationModal';
+import { useRouter } from 'next/navigation';
 
 const VideoConsultation = () => {
   const { data: consultationData, isLoading } = useVideoConsultations();
   const { data: session } = useSession();
   const isLawyer = session?.user?.role === 'lawyer';
+  const router = useRouter();
 
   const updateStatus = useUpdateConsultationStatus();
   const updateSchedule = useUpdateConsultationSchedule();
@@ -64,6 +66,8 @@ const VideoConsultation = () => {
 
     closeModal();
   };
+
+  const handeleGoToVideoCall = (roomId: string) => router.push(`/video-consultation/${roomId}`);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -125,7 +129,11 @@ const VideoConsultation = () => {
 
                   {c.status === ConsultationStatus.UPCOMING && (
                     <div className="flex gap-2">
-                      <Button variant="outline" onClick={() => {}} className="shrink-0">
+                      <Button
+                        variant="outline"
+                        onClick={() => handeleGoToVideoCall(c.roomCode)}
+                        className="shrink-0"
+                      >
                         Join Call
                       </Button>
                     </div>
