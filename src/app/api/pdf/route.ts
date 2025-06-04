@@ -71,13 +71,9 @@ export async function POST(request: NextRequest) {
     `;
 
     const { default: puppeteer } = await import('puppeteer-core');
-
-    const chromePath = '/vercel/.cache/puppeteer/chrome/linux-137.0.7151.55/chrome-linux64/chrome';
-
-    const browser = await puppeteer.launch({
-      headless: true,
-      executablePath: chromePath,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    const BROWSERLESS_TOKEN = 'b78ebd46-ffbe-4f5f-94d7-77d6bf8c237e';
+    const browser = await puppeteer.connect({
+      browserWSEndpoint: `wss://chrome.browserless.io?token=${BROWSERLESS_TOKEN}`,
     });
 
     const page = await browser.newPage();
@@ -99,7 +95,7 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error generating PDF:', error);
+    console.error('Error generating PDF via Browserless:', error);
     return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
   }
 }
