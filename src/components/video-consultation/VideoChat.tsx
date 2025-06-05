@@ -20,6 +20,7 @@ import {
   MoreVertical,
   Settings,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface VideoChatProps {
   roomId: string;
@@ -47,6 +48,8 @@ export default function VideoChat({
     toggleScreenShare,
     leaveRoom,
   } = useVideoChat(roomId, userName, videoDeviceId, audioDeviceId);
+
+  const router = useRouter();
 
   const screenStreams = remoteStreams.filter(r => r.isScreen);
   const sharerIds = new Set(screenStreams.map(r => r.userId));
@@ -162,7 +165,10 @@ export default function VideoChat({
         <Button
           variant="destructive"
           size="icon"
-          onClick={leaveRoom}
+          onClick={() => {
+            leaveRoom();
+            window.location.reload();
+          }}
           className="h-12 w-12 rounded-full"
         >
           <PhoneOff className="h-5 w-5" />
